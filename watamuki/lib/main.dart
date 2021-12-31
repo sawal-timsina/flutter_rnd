@@ -1,43 +1,32 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
-import 'src/config/routes/app_routes.dart';
 import 'src/config/themes/app_theme.dart';
+import 'src/presentation/pages/main_app.dart';
+import 'src/presentation/pages/onboarding.dart';
+import 'src/presentation/providers/onboarding_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  final bool shouldShowOnboardingPage =
-      sharedPreferences.getBool('shouldShowOnboardingPage') ?? true;
 
-  runApp(Application(
-    shouldShowOnboardingPage: shouldShowOnboardingPage,
-  ));
-}
-
-class Application extends StatelessWidget {
-  final bool shouldShowOnboardingPage;
-
-  const Application({Key? key, required this.shouldShowOnboardingPage})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    return Sizer(builder: (context, orientation, deviceType) {
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+          create: (_) => OnboardingProvider(sharedPreferences)),
+    ],
+    child: Sizer(builder: (_context, orientation, deviceType) {
       return MaterialApp(
         debugShowCheckedModeBanner: kDebugMode,
         title: "Watamuki",
         theme: AppTheme.light,
-        initialRoute: shouldShowOnboardingPage ? "/onboarding" : "/",
-        onGenerateRoute: AppRoutes.onGenerateRoutes,
+        home: _context.watch<OnboardingProvider>().shouldShowOnboardingPage
+            ? Onboarding()
+            : MainApp(),
       );
-    });
-  }
+    }),
+  ));
 }
