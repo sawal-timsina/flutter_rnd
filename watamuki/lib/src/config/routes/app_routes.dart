@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/pages/demo.dart';
 import 'package:watamuki/src/presentation/pages/home.dart';
 
 class AppRoutes {
@@ -7,18 +8,18 @@ class AppRoutes {
     if (kDebugMode) {
       switch (settings.name) {
         case '/login':
-          return materialRoute(MyHomePage(title: 'Login'));
+          return materialRoute(const Demo(title: 'Login'));
         case '/register':
-          return materialRoute(MyHomePage(title: 'Register'));
+          return materialRoute(const Demo(title: 'Register'));
       }
     }
 
     if (kReleaseMode) {
       switch (settings.name) {
         case '/update_profile':
-          return materialRoute(MyHomePage(title: 'Update Profile'));
+          return materialRoute(const Demo(title: 'Update Profile'));
         case '/update_email':
-          return materialRoute(MyHomePage(title: 'Update Email'));
+          return materialRoute(const Demo(title: 'Update Email'));
       }
     }
 
