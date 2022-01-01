@@ -59,14 +59,11 @@ class DrawerTopHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children:
-            kDebugMode ? _renderDefaultView(context) : _renderAuthView(context),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children:
+          kDebugMode ? _renderDefaultView(context) : _renderAuthView(context),
     );
   }
 }

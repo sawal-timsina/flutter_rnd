@@ -25,7 +25,8 @@ class _DrawerItemState extends State<DrawerItem> {
         Navigator.pop(context);
         widget.onTap!();
       },
-      minLeadingWidth: 20,
+      horizontalTitleGap: 0,
+      contentPadding: const EdgeInsets.symmetric(vertical: 0),
       leading: Icon(
         widget.icon,
         size: 24.0,
