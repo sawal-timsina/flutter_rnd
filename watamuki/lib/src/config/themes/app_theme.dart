@@ -101,6 +101,27 @@ class AppTheme {
         iconTheme: IconThemeData(color: AppColors.black),
         titleTextStyle: TextStyle(color: AppColors.black),
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        selectedLabelStyle: TextStyle(
+          color: AppColors.black,
+          height: 22.0 / 16.0,
+          fontSize: 16.0,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.bold,
+          leadingDistribution: TextLeadingDistribution.even,
+        ),
+        unselectedLabelStyle: TextStyle(
+          color: AppColors.black,
+          height: 22.0 / 16.0,
+          fontSize: 16.0,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.normal,
+          leadingDistribution: TextLeadingDistribution.even,
+        ),
+      ),
     );
   }
 }

@@ -23,7 +23,7 @@ class CustomDrawer extends StatelessWidget {
         title: "Terms and Conditions",
       ),
       const DrawerItem(
-        icon: Icons.info_outline_rounded,
+        icon: Icons.local_police_outlined,
         title: "Privacy Policy",
       ),
       const DrawerItem(

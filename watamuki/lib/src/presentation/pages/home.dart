@@ -1,12 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
+import 'package:watamuki/src/presentation/widgets/molecules/bottom_nav_bar.dart';
+import 'package:watamuki/src/presentation/widgets/molecules/header.dart';
+import 'package:watamuki/src/presentation/widgets/organisms/custom_drawer.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key) {
-    if (kDebugMode) {
-      print({title});
-    }
-  }
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -15,51 +14,107 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  ButtonSize _buttonSize = ButtonSize.small;
+  ButtonType _buttonType = ButtonType.filled;
+  bool _isDisabled = false;
 
-  void _incrementCounter() {
+  void _toggleButtonSize() {
     setState(() {
-      _counter++;
+      _buttonSize = _buttonSize == ButtonSize.large
+          ? ButtonSize.medium
+          : _buttonSize == ButtonSize.medium
+              ? ButtonSize.small
+              : ButtonSize.large;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: const Header(),
+      drawer: const CustomDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            ElevatedButton(
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              disabled: _isDisabled,
               onPressed: () {
-                Navigator.pushReplacementNamed(context, "/login");
+                // Navigator.pushNamed(context, "/login");
               },
-              child: const Text("Login"),
+              label: 'Login',
             ),
-            ElevatedButton(
+            const SizedBox(height: 16),
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              disabled: _isDisabled,
               onPressed: () {
                 Navigator.pushNamed(context, "/register");
               },
-              child: const Text("Register"),
+              label: "Register",
+            ),
+            const SizedBox(height: 16),
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              disabled: _isDisabled,
+              onPressed: _toggleButtonSize,
+              label: "Size",
+            ),
+            const SizedBox(height: 16),
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              disabled: _isDisabled,
+              onPressed: () {
+                setState(() {
+                  _buttonType = ButtonType.filled;
+                });
+              },
+              label: "Filled",
+            ),
+            const SizedBox(height: 16),
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              disabled: _isDisabled,
+              onPressed: () {
+                setState(() {
+                  _buttonType = ButtonType.outlined;
+                });
+              },
+              label: "Outlined",
+            ),
+            const SizedBox(height: 16),
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              disabled: _isDisabled,
+              onPressed: () {
+                setState(() {
+                  _buttonType = ButtonType.transparent;
+                });
+              },
+              label: "Transparent",
+            ),
+            const SizedBox(height: 16),
+            Button(
+              size: _buttonSize,
+              type: _buttonType,
+              onPressed: () {
+                setState(() {
+                  _isDisabled = !_isDisabled;
+                });
+              },
+              label: "Disable",
             )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
