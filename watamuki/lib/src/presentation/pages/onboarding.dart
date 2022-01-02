@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:watamuki/src/presentation/pages/home.dart';
 import 'package:watamuki/src/presentation/providers/onboarding_provider.dart';
+import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
 class Onboarding extends StatelessWidget {
+  static const routeName = 'onboarding';
+
   Onboarding({Key? key}) : super(key: key) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
@@ -22,11 +26,13 @@ class Onboarding extends StatelessWidget {
               const Text(
                 'Onboarding',
               ),
-              ElevatedButton(
-                  onPressed: () async {
-                    context.read<OnboardingProvider>().onboardingFinish();
-                  },
-                  child: const Text("Get started"))
+              Button(
+                onPressed: () async {
+                  context.read<OnboardingProvider>().onboardingFinish();
+                  Navigator.pushReplacementNamed(context, MyHomePage.routeName);
+                },
+                label: "Get started",
+              )
             ],
           ),
         ),

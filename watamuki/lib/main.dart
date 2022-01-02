@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:watamuki/src/config/routes/app_routes.dart';
+import 'package:watamuki/src/presentation/pages/home.dart';
 
 import 'src/config/themes/app_theme.dart';
-import 'src/presentation/pages/main_app.dart';
 import 'src/presentation/pages/onboarding.dart';
 import 'src/presentation/providers/onboarding_provider.dart';
 
@@ -23,9 +24,11 @@ void main() async {
         debugShowCheckedModeBanner: kDebugMode,
         title: "Watamuki",
         theme: AppTheme.light,
-        home: _context.watch<OnboardingProvider>().shouldShowOnboardingPage
-            ? Onboarding()
-            : MainApp(),
+        initialRoute:
+            _context.watch<OnboardingProvider>().shouldShowOnboardingPage
+                ? Onboarding.routeName
+                : MyHomePage.routeName,
+        onGenerateRoute: AppRouter.onGenerateRoutes,
       );
     }),
   ));

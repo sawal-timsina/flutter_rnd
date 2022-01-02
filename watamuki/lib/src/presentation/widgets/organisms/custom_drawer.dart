@@ -15,7 +15,7 @@ class CustomDrawer extends StatelessWidget {
         icon: Icons.help_outline_rounded,
         title: "Inquiry",
         onTap: () {
-          Navigator.pushNamed(context, "/inquiry",
+          Navigator.pushNamed(context, "inquiry",
               arguments: DemoScreenArguments("+9779810479442"));
         },
       ),
@@ -23,28 +23,28 @@ class CustomDrawer extends StatelessWidget {
         icon: Icons.info_outline_rounded,
         title: "About",
         onTap: () {
-          Navigator.pushNamed(context, "/about");
+          Navigator.pushNamed(context, "about");
         },
       ),
       DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Terms and Conditions",
         onTap: () {
-          Navigator.pushNamed(context, "/terms_and_condition");
+          Navigator.pushNamed(context, "terms_and_condition");
         },
       ),
       DrawerItem(
         icon: Icons.local_police_outlined,
         title: "Privacy Policy",
         onTap: () {
-          Navigator.pushNamed(context, "/privacy_policy");
+          Navigator.pushNamed(context, "privacy_policy");
         },
       ),
       DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Extra",
         onTap: () {
-          Navigator.pushNamed(context, "/extra");
+          Navigator.pushNamed(context, "extra");
         },
       ),
     ];
@@ -56,28 +56,28 @@ class CustomDrawer extends StatelessWidget {
         icon: Icons.help_outline_rounded,
         title: "Update Profile",
         onTap: () {
-          Navigator.pushNamed(context, "/update_profile");
+          Navigator.pushNamed(context, "update_profile");
         },
       ),
       DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Update mobile number",
         onTap: () {
-          Navigator.pushNamed(context, "/update_mobile");
+          Navigator.pushNamed(context, "update_mobile");
         },
       ),
       DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Update password",
         onTap: () {
-          Navigator.pushNamed(context, "/update_password");
+          Navigator.pushNamed(context, "update_password");
         },
       ),
       DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Update email",
         onTap: () {
-          Navigator.pushNamed(context, "/update_email");
+          Navigator.pushNamed(context, "update_email");
         },
       ),
     ];
