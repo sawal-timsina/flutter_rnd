@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/widgets/molecules/page_header.dart';
 
 class DemoScreenArguments {
   final String phone;
@@ -20,9 +21,7 @@ class _DemoState extends State<Demo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: const PageHeader(),
       body: Center(
         child: Column(
           children: [

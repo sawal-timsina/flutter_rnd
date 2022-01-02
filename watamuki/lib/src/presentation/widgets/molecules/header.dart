@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
@@ -38,5 +37,5 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(SizerUtil.width, 56);
+  Size get preferredSize => const Size.fromHeight(56);
 }
