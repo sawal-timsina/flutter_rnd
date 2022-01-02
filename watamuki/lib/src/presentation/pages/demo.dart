@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:watamuki/src/presentation/providers/onboarding_provider.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/page_header.dart';
 
 class DemoScreenArguments {
@@ -27,6 +29,9 @@ class _DemoState extends State<Demo> {
           children: [
             Text(widget.title),
             Text("args :: " + (widget.args?.phone).toString()),
+            Text("onboarding :: " +
+                (context.read<OnboardingProvider>().shouldShowOnboardingPage)
+                    .toString()),
           ],
         ),
       ),

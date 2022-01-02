@@ -17,7 +17,8 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-          create: (_) => OnboardingProvider(sharedPreferences)),
+        create: (_) => OnboardingProvider(sharedPreferences),
+      ),
     ],
     child: Sizer(builder: (_context, orientation, deviceType) {
       return MaterialApp(
@@ -27,7 +28,7 @@ void main() async {
         initialRoute:
             _context.watch<OnboardingProvider>().shouldShowOnboardingPage
                 ? Onboarding.routeName
-                : MyHomePage.routeName,
+                : HomePage.routeName,
         onGenerateRoute: AppRouter.onGenerateRoutes,
       );
     }),

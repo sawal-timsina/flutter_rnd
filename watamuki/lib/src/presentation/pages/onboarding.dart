@@ -29,7 +29,7 @@ class Onboarding extends StatelessWidget {
               Button(
                 onPressed: () async {
                   context.read<OnboardingProvider>().onboardingFinish();
-                  Navigator.pushReplacementNamed(context, MyHomePage.routeName);
+                  Navigator.pushReplacementNamed(context, HomePage.routeName);
                 },
                 label: "Get started",
               )
