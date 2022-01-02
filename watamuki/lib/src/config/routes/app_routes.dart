@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/presentation/pages/demo.dart';
 import 'package:watamuki/src/presentation/pages/home.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/coupon.dart';
 import 'package:watamuki/src/presentation/pages/home_pages/top.dart';
 import 'package:watamuki/src/presentation/pages/onboarding.dart';
 
@@ -31,7 +32,7 @@ class AppRouter {
 
     switch (settings.name) {
       case '/':
-        return materialRoute(MyHomePage());
+        return materialRoute(HomePage());
       case Onboarding.routeName:
         return materialRoute(Onboarding());
       case 'inquiry':
@@ -51,23 +52,44 @@ class AppRouter {
     }
   }
 
-  static Route<dynamic> onGenerateBottomNavRoutes(RouteSettings settings) {
+  static PageRouteBuilder<dynamic> onGenerateBottomNavRoutes(
+      RouteSettings settings) {
+    late Widget page;
     switch (settings.name) {
-      case 'top':
-        return materialRoute(const Top());
-      case 'coupon':
-        return materialRoute(const Top());
+      case TopPage.routeName:
+        page = const TopPage();
+        break;
+      case CouponPage.routeName:
+        page = const CouponPage(title: "Coupon");
+        break;
       case 'stamp':
-        return materialRoute(const Top());
+        page = const CouponPage(title: "Stamp");
+        break;
       case 'facilities':
-        return materialRoute(const Top());
+        page = const CouponPage(title: "Facilities");
+        break;
       case 'facility_detail':
-        final DemoScreenArguments args =
-            settings.arguments as DemoScreenArguments;
-        return materialRoute(Demo(title: "Inquiry", args: args));
-      default:
-        throw const FormatException('Route not found');
+        page = const CouponPage(title: "Facility Detail");
+        break;
+      case 'town_information':
+        page = const CouponPage(title: "Town Information");
+        break;
+      case 'town_info_details':
+        page = const CouponPage(title: "Town Information");
+        break;
+      case 'special_feature':
+        page = const CouponPage(title: "Special Feature");
+        break;
     }
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return Container(
+          color: Colors.white,
+          child: page,
+        );
+      },
+      settings: settings,
+    );
   }
 
   static Route<dynamic> materialRoute(Widget view) {
