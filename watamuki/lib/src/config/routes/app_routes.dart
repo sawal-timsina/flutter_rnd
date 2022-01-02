@@ -18,6 +18,10 @@ class AppRoutes {
       switch (settings.name) {
         case '/update_profile':
           return materialRoute(const Demo(title: 'Update Profile'));
+        case '/update_mobile':
+          return materialRoute(const Demo(title: 'Update Mobile'));
+        case '/update_password':
+          return materialRoute(const Demo(title: 'Update Password'));
         case '/update_email':
           return materialRoute(const Demo(title: 'Update Email'));
       }
@@ -25,7 +29,19 @@ class AppRoutes {
 
     switch (settings.name) {
       case '/':
-        return materialRoute(MyHomePage(title: 'Home'));
+        return materialRoute(const MyHomePage());
+      case '/inquiry':
+        final DemoScreenArguments args =
+            settings.arguments as DemoScreenArguments;
+        return materialRoute(Demo(title: "Inquiry", args: args));
+      case '/about':
+        return materialRoute(const Demo(title: "About"));
+      case '/terms_and_condition':
+        return materialRoute(const Demo(title: "Terms and condition"));
+      case '/privacy_policy':
+        return materialRoute(const Demo(title: "Privacy Policy"));
+      case '/extra':
+        return materialRoute(const Demo(title: "Extra"));
       default:
         throw const FormatException('Route not found');
     }

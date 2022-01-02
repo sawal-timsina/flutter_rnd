@@ -2,54 +2,83 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
+import 'package:watamuki/src/presentation/pages/demo.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/drawer_items.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/drawer_top_header.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
 
-  List<Widget> _renderDefaultMenus() {
+  List<Widget> _renderDefaultMenus(BuildContext context) {
     return [
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.help_outline_rounded,
         title: "Inquiry",
+        onTap: () {
+          Navigator.pushNamed(context, "/inquiry",
+              arguments: DemoScreenArguments("+9779810479442"));
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "About",
+        onTap: () {
+          Navigator.pushNamed(context, "/about");
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Terms and Conditions",
+        onTap: () {
+          Navigator.pushNamed(context, "/terms_and_condition");
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.local_police_outlined,
         title: "Privacy Policy",
+        onTap: () {
+          Navigator.pushNamed(context, "/privacy_policy");
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Extra",
+        onTap: () {
+          Navigator.pushNamed(context, "/extra");
+        },
       ),
     ];
   }
 
-  List<Widget> _renderAuthMenus() {
+  List<Widget> _renderAuthMenus(BuildContext context) {
     return [
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.help_outline_rounded,
         title: "Update Profile",
+        onTap: () {
+          Navigator.pushNamed(context, "/update_profile");
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Update mobile number",
+        onTap: () {
+          Navigator.pushNamed(context, "/update_mobile");
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Update password",
+        onTap: () {
+          Navigator.pushNamed(context, "/update_password");
+        },
       ),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Update email",
+        onTap: () {
+          Navigator.pushNamed(context, "/update_email");
+        },
       ),
     ];
   }
@@ -87,8 +116,8 @@ class CustomDrawer extends StatelessWidget {
                         vertical: 16, horizontal: 32),
                     children: <Widget>[
                       const DrawerTopHeader(),
-                      ...(kDebugMode ? _renderAuthMenus() : []),
-                      ..._renderDefaultMenus(),
+                      ...(kDebugMode ? _renderAuthMenus(context) : []),
+                      ..._renderDefaultMenus(context),
                       ...(kDebugMode ? _renderAuthMenusFooter() : []),
                     ],
                   ),

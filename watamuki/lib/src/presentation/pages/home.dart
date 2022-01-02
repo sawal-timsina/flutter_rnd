@@ -5,9 +5,9 @@ import 'package:watamuki/src/presentation/widgets/molecules/header.dart';
 import 'package:watamuki/src/presentation/widgets/organisms/custom_drawer.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  static const routeName = '/';
 
-  final String title;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
