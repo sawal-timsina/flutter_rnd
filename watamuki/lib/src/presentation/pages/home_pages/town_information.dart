@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/town_info_details.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
 import 'home_navigator.dart';
@@ -20,7 +21,8 @@ class TownInformationPage extends StatelessWidget {
           const SizedBox(height: 8),
           Button(
             onPressed: () {
-              homeNavigator.currentState?.pushNamed("facility_detail");
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
             },
             label: title,
           ),

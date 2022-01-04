@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/special_feature.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/town_information.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
+
+import 'home_navigator.dart';
 
 class TopPage extends StatefulWidget {
   static const routeName = 'top';
@@ -230,20 +234,18 @@ class _TopPageState extends State<TopPage> {
             size: _buttonSize,
             type: _buttonType,
             onPressed: () {
-              setState(() {
-                _isDisabled = !_isDisabled;
-              });
+              homeNavigator.currentState
+                  ?.pushNamed(SpecialFeaturePage.routeName);
             },
-            label: "Disable",
+            label: "Disable second last",
           ),
           const SizedBox(height: 16),
           Button(
             size: _buttonSize,
             type: _buttonType,
             onPressed: () {
-              setState(() {
-                _isDisabled = !_isDisabled;
-              });
+              homeNavigator.currentState
+                  ?.pushNamed(TownInformationPage.routeName);
             },
             label: "Disable last",
           ),

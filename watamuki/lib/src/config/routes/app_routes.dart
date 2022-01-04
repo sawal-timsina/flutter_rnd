@@ -65,17 +65,21 @@ class AppRouter {
     FacilitiesPage.routeName,
   ];
 
-  static PageRouteBuilder<dynamic> onGenerateBottomNavRoutes(
-      RouteSettings settings) {
+  static PageRouteBuilder<dynamic>? onGenerateBottomNavRoutes(
+      RouteSettings settings, PageController tabController) {
     switch (settings.name) {
-      case TopPage.routeName:
-        return _homeRoute(const TopPage(), settings);
-      case CouponPage.routeName:
-        return _homeRoute(const CouponPage(), settings);
-      case StampPage.routeName:
-        return _homeRoute(const StampPage(), settings);
-      case FacilitiesPage.routeName:
-        return _homeRoute(const FacilitiesPage(), settings);
+      case HomePage.routeName:
+        return _homeRoute(
+            PageView(
+                controller: tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  TopPage(),
+                  CouponPage(),
+                  StampPage(),
+                  FacilitiesPage(),
+                ]),
+            settings);
       case TownInformationPage.routeName:
         return _homeRoute(const TownInformationPage(), settings);
       case TownInfoDetailPage.routeName:
