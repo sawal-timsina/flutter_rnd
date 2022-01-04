@@ -6,12 +6,23 @@ import '../home.dart';
 
 final homeNavigator = GlobalKey<NavigatorState>();
 
-class HomeNavigator extends StatelessWidget {
-  HomeNavigator({
+class HomeNavigator extends StatefulWidget {
+  const HomeNavigator({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<HomeNavigator> createState() => _HomeNavigatorState();
+}
+
+class _HomeNavigatorState extends State<HomeNavigator> {
   final PageController _tabController = PageController();
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

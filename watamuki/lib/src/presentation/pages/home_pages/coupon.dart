@@ -3,14 +3,22 @@ import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
 import 'home_navigator.dart';
 
-class CouponPage extends StatelessWidget {
+class CouponPage extends StatefulWidget {
   static const routeName = 'coupon';
 
   const CouponPage({Key? key}) : super(key: key);
 
   @override
+  State<CouponPage> createState() => _CouponPageState();
+}
+
+class _CouponPageState extends State<CouponPage>
+    with AutomaticKeepAliveClientMixin<CouponPage> {
+  @override
   Widget build(BuildContext context) {
-    String title = routeName;
+    super.build(context);
+
+    String title = CouponPage.routeName;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -29,4 +37,7 @@ class CouponPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

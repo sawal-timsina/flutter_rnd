@@ -3,15 +3,22 @@ import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
 import 'home_navigator.dart';
 
-class StampPage extends StatelessWidget {
+class StampPage extends StatefulWidget {
   static const routeName = 'stamp';
 
   const StampPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    String title = routeName;
+  State<StampPage> createState() => _StampPageState();
+}
 
+class _StampPageState extends State<StampPage>
+    with AutomaticKeepAliveClientMixin<StampPage> {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    String title = StampPage.routeName;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -28,4 +35,7 @@ class StampPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

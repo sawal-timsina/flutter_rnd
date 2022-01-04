@@ -15,11 +15,123 @@ class SpecialFeaturePage extends StatelessWidget {
     String title = routeName;
 
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(title),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(TownInfoDetailPage.routeName);
+            },
+            label: TownInfoDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
+          Button(
+            onPressed: () {
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
+            },
+            label: FacilityDetailPage.routeName,
+          ),
+          const SizedBox(height: 16),
           Button(
             onPressed: () {
               homeNavigator.currentState

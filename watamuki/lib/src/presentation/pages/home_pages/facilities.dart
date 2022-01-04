@@ -4,14 +4,22 @@ import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 import 'facility_detail.dart';
 import 'home_navigator.dart';
 
-class FacilitiesPage extends StatelessWidget {
+class FacilitiesPage extends StatefulWidget {
   static const routeName = 'facilities';
 
   const FacilitiesPage({Key? key}) : super(key: key);
 
   @override
+  State<FacilitiesPage> createState() => _FacilitiesPageState();
+}
+
+class _FacilitiesPageState extends State<FacilitiesPage>
+    with AutomaticKeepAliveClientMixin<FacilitiesPage> {
+  @override
   Widget build(BuildContext context) {
-    String title = routeName;
+    super.build(context);
+
+    String title = FacilitiesPage.routeName;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -29,4 +37,7 @@ class FacilitiesPage extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

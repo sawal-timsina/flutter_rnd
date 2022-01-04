@@ -14,7 +14,8 @@ class TopPage extends StatefulWidget {
   _TopPageState createState() => _TopPageState();
 }
 
-class _TopPageState extends State<TopPage> {
+class _TopPageState extends State<TopPage>
+    with AutomaticKeepAliveClientMixin<TopPage> {
   ButtonSize _buttonSize = ButtonSize.small;
   ButtonType _buttonType = ButtonType.filled;
   bool _isDisabled = false;
@@ -31,6 +32,7 @@ class _TopPageState extends State<TopPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(
       child: ListView(
         children: <Widget>[
@@ -253,4 +255,7 @@ class _TopPageState extends State<TopPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
