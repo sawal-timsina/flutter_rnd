@@ -16,7 +16,104 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           label: "Bus pass",
           textStyle: Theme.of(context).textTheme.subtitle1,
           disableBorder: true,
-          onPressed: () {},
+          onPressed: () {
+            /*showModalBottomSheet<dynamic>(
+              context: context,
+              barrierColor: AppColors.greyDark.withAlpha(153),
+              backgroundColor: Colors.white,
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(24)),
+              ),
+              builder: (_) {
+                return SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8, bottom: 8, left: 20, right: 8),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "Title",
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.close),
+                              )
+                            ],
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          child: Column(
+                            children: const [
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data"),
+                              ),
+                              ListTile(
+                                title: Text("data l "),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );*/
+          },
         ),
         Button(
           type: ButtonType.transparent,

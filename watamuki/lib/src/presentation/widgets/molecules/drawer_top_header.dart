@@ -23,7 +23,7 @@ class DrawerTopHeader extends StatelessWidget {
       Button(
           onPressed: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, "/register");
+            Navigator.pushNamed(context, "register");
           },
           label: "Register"),
       const SizedBox(height: 16),
@@ -38,7 +38,7 @@ class DrawerTopHeader extends StatelessWidget {
           type: ButtonType.outlined,
           onPressed: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, "/login");
+            Navigator.pushNamed(context, "login");
           },
           label: 'Login'),
       const SizedBox(height: 16),
