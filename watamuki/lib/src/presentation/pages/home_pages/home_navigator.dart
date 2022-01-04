@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/config/routes/app_routes.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/bottom_nav_bar.dart';
+import 'package:watamuki/src/presentation/widgets/organisms/double_back_to_close.dart';
 
 import '../home.dart';
 
@@ -26,14 +27,14 @@ class _HomeNavigatorState extends State<HomeNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return DoubleBackToClose(
+      onBackPress: () async {
         bool? canGoBack = homeNavigator.currentState?.canPop();
         if (canGoBack!) {
           homeNavigator.currentState?.pop();
-          return Future.value(!canGoBack);
+          return false;
         }
-        return Future.value(!canGoBack);
+        return true;
       },
       child: Scaffold(
         extendBody: true,
