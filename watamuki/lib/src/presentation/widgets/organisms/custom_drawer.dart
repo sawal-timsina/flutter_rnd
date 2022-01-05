@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:watamuki/src/config/themes/colors.dart';

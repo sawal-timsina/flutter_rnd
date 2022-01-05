@@ -1,5 +1,18 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/material.dart'
+    show
+        Key,
+        StatelessWidget,
+        BuildContext,
+        Widget,
+        Text,
+        Theme,
+        SizedBox,
+        Navigator,
+        Divider,
+        Column,
+        MainAxisAlignment,
+        CrossAxisAlignment;
 import 'package:watamuki/src/config/themes/colors.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 

@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kDebugMode, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/presentation/pages/demo.dart';
 import 'package:watamuki/src/presentation/pages/home.dart';
