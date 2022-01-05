@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kDebugMode, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/presentation/pages/demo.dart';
 import 'package:watamuki/src/presentation/pages/home.dart';
@@ -10,20 +9,22 @@ import 'package:watamuki/src/presentation/pages/home_pages/stamp.dart';
 import 'package:watamuki/src/presentation/pages/home_pages/top.dart';
 import 'package:watamuki/src/presentation/pages/home_pages/town_info_details.dart';
 import 'package:watamuki/src/presentation/pages/home_pages/town_information.dart';
+import 'package:watamuki/src/presentation/pages/login.dart';
 import 'package:watamuki/src/presentation/pages/onboarding.dart';
 
 class AppRouter {
-  static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
-    if (kDebugMode) {
+  static Route<dynamic> onGenerateRoutes(
+      RouteSettings settings, bool isLoggedIn) {
+    if (!isLoggedIn) {
       switch (settings.name) {
-        case 'login':
-          return _materialRoute(const Demo(title: 'Login'));
+        case LoginPage.routeName:
+          return _materialRoute(const LoginPage());
         case 'register':
           return _materialRoute(const Demo(title: 'Register'));
       }
     }
 
-    if (kReleaseMode) {
+    if (isLoggedIn) {
       switch (settings.name) {
         case 'update_profile':
           return _materialRoute(const Demo(title: 'Update Profile'));

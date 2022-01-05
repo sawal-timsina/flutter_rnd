@@ -1,7 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
+import 'package:watamuki/src/config/firebase/firebase.dart';
 
 class AuthProvider with ChangeNotifier {
+  AuthProvider() : super() {
+    firebaseAuth.authStateChanges().listen((User? user) {
+      if (user != null) {
+        _user = user;
+        _loggedIn = true;
+      } else {
+        _phoneVerified = false;
+        _phoneNumber = "";
+        _loggedIn = false;
+        _user = null;
+      }
+      notifyListeners();
+    });
+  }
+
   bool _loggedIn = false;
 
   bool get loggedIn => _loggedIn;

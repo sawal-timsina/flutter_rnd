@@ -14,6 +14,7 @@ import 'package:flutter/material.dart'
         CrossAxisAlignment;
 import 'package:provider/provider.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
+import 'package:watamuki/src/presentation/pages/login.dart';
 import 'package:watamuki/src/presentation/providers/auth_provider.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
@@ -52,7 +53,7 @@ class DrawerTopHeader extends StatelessWidget {
           type: ButtonType.outlined,
           onPressed: () {
             Navigator.pop(context);
-            Navigator.pushNamed(context, "login");
+            Navigator.pushNamed(context, LoginPage.routeName);
           },
           label: 'Login'),
       const SizedBox(height: 16),
