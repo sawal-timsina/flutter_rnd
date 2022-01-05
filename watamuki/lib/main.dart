@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:watamuki/src/config/routes/app_routes.dart';
 import 'package:watamuki/src/presentation/pages/home.dart';
+import 'package:watamuki/src/presentation/providers/auth_provider.dart';
 
 import 'src/config/firebase/firebase.dart';
 import 'src/config/themes/app_theme.dart';
@@ -23,6 +24,9 @@ void main() async {
     providers: [
       ChangeNotifierProvider(
         create: (_) => OnboardingProvider(sharedPreferences),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => AuthProvider(),
       ),
     ],
     child: Sizer(builder: (_context, orientation, deviceType) {

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart'
     show
         Key,
@@ -13,7 +12,9 @@ import 'package:flutter/material.dart'
         Column,
         MainAxisAlignment,
         CrossAxisAlignment;
+import 'package:provider/provider.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
+import 'package:watamuki/src/presentation/providers/auth_provider.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 
 class DrawerTopHeader extends StatelessWidget {
@@ -59,10 +60,10 @@ class DrawerTopHeader extends StatelessWidget {
     ];
   }
 
-  List<Widget> _renderAuthView(BuildContext context) {
+  List<Widget> _renderAuthView(BuildContext context, String? name) {
     return [
       Text(
-        "Sawal timsina",
+        "$name",
         style: Theme.of(context).textTheme.subtitle1,
       ),
       const SizedBox(height: 8),
@@ -70,13 +71,23 @@ class DrawerTopHeader extends StatelessWidget {
     ];
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _columnViewRender(List<Widget> children) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children:
-          kDebugMode ? _renderDefaultView(context) : _renderAuthView(context),
+      children: children,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AuthProvider>(
+      builder: (context, value, child) {
+        return value.loggedIn
+            ? _columnViewRender(
+                _renderAuthView(context, value.user?.displayName))
+            : _columnViewRender(_renderDefaultView(context));
+      },
     );
   }
 }

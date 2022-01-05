@@ -1,8 +1,10 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:watamuki/src/config/firebase/firebase.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
 import 'package:watamuki/src/presentation/pages/demo.dart';
+import 'package:watamuki/src/presentation/providers/auth_provider.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/drawer_items.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/drawer_top_header.dart';
 
@@ -88,9 +90,12 @@ class CustomDrawer extends StatelessWidget {
       const SizedBox(height: 8),
       const Divider(color: AppColors.greyDark),
       const SizedBox(height: 8),
-      const DrawerItem(
+      DrawerItem(
         icon: Icons.info_outline_rounded,
         title: "Logout",
+        onTap: () {
+          firebaseAuth.signOut();
+        },
       ),
     ];
   }
@@ -116,9 +121,17 @@ class CustomDrawer extends StatelessWidget {
                         vertical: 16, horizontal: 32),
                     children: <Widget>[
                       const DrawerTopHeader(),
-                      ...(kDebugMode ? _renderAuthMenus(context) : []),
+                      Consumer<AuthProvider>(builder: (context, value, child) {
+                        return value.loggedIn
+                            ? Column(children: _renderAuthMenus(context))
+                            : const SizedBox.shrink();
+                      }),
                       ..._renderDefaultMenus(context),
-                      ...(kDebugMode ? _renderAuthMenusFooter() : []),
+                      Consumer<AuthProvider>(builder: (context, value, child) {
+                        return value.loggedIn
+                            ? Column(children: _renderAuthMenusFooter())
+                            : const SizedBox.shrink();
+                      }),
                     ],
                   ),
                 ),
