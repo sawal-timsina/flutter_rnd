@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -24,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             topRight: Radius.circular(24), topLeft: Radius.circular(24)),
         boxShadow: [
           BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.06),
+            color: Color.fromRGBO(0, 0, 0, 0.09),
             offset: Offset(0, -8),
             blurRadius: 30,
             spreadRadius: 0,
@@ -35,7 +36,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
         borderRadius: const BorderRadius.only(
             topRight: Radius.circular(24), topLeft: Radius.circular(24)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: defaultTargetPlatform == TargetPlatform.iOS
+              ? const EdgeInsets.only(top: 16)
+              : const EdgeInsets.symmetric(vertical: 16),
           child: BottomNavigationBar(
             currentIndex: currentIndex,
             onTap: (value) {
