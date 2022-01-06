@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart'
     show
-        Key,
-        StatelessWidget,
         BuildContext,
-        Widget,
+        Column,
+        CrossAxisAlignment,
+        Divider,
+        Key,
+        Navigator,
+        SizedBox,
+        StatelessWidget,
         Text,
         Theme,
-        SizedBox,
-        Navigator,
-        Divider,
-        Column,
-        MainAxisAlignment,
-        CrossAxisAlignment;
+        Widget;
 import 'package:provider/provider.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
 import 'package:watamuki/src/presentation/pages/login.dart';
@@ -63,18 +62,18 @@ class DrawerTopHeader extends StatelessWidget {
 
   List<Widget> _renderAuthView(BuildContext context, String? name) {
     return [
+      const SizedBox(height: 8),
       Text(
         "$name",
         style: Theme.of(context).textTheme.subtitle1,
       ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 16),
       const Divider(color: AppColors.greyDark),
     ];
   }
 
   Widget _columnViewRender(List<Widget> children) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: children,
     );
