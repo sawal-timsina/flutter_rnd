@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -104,7 +105,7 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      bottom: true,
+      bottom: defaultTargetPlatform != TargetPlatform.iOS,
       child: ClipRRect(
         borderRadius:
             const BorderRadius.horizontal(right: Radius.circular(32.0)),
@@ -136,8 +137,10 @@ class CustomDrawer extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                  padding: defaultTargetPlatform == TargetPlatform.iOS
+                      ? const EdgeInsets.only(top: 16, left: 24, right: 24)
+                      : const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 24),
                   child: Row(
                     children: <Widget>[
                       Icon(
