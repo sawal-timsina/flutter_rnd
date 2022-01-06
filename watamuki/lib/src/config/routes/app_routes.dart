@@ -18,7 +18,7 @@ class AppRouter {
     if (!isLoggedIn) {
       switch (settings.name) {
         case LoginPage.routeName:
-          return _materialRoute(const LoginPage());
+          return _materialRoute(LoginPage());
         case 'register':
           return _materialRoute(const Demo(title: 'Register'));
       }

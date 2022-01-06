@@ -2,6 +2,13 @@
   <library name="Dart Packages" type="DartPackagesLibraryType">
     <properties>
       <option name="packageNameToDirsMap">
+        <entry key="args">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="async">
           <value>
             <list>
@@ -48,6 +55,20 @@
           <value>
             <list>
               <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="easy_localization">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/easy_localization-3.0.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="easy_logger">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/easy_logger-0.0.2/lib" />
             </list>
           </value>
         </entry>
@@ -121,10 +142,24 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_form_builder">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_form_builder-7.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_lints">
           <value>
             <list>
               <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_localizations">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Android/sdk/flutter/packages/flutter_localizations/lib" />
             </list>
           </value>
         </entry>
@@ -146,6 +181,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/fluttericon-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="form_builder_validators">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/form_builder_validators-7.2.0/lib" />
             </list>
           </value>
         </entry>
@@ -446,6 +488,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0/lib" />
@@ -453,6 +496,8 @@
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1/lib" />
+      <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/easy_localization-3.0.0/lib" />
+      <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/easy_logger-0.0.2/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2/lib" />
@@ -462,8 +507,10 @@
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.10.6/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.2.3/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.5.3/lib" />
+      <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_form_builder-7.0.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/fluttericon-2.0.0/lib" />
+      <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/form_builder_validators-7.2.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-2.2.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/lib" />
@@ -507,6 +554,7 @@
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/Library/Android/sdk/flutter/packages/flutter_localizations/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/packages/flutter_test/lib" />
       <root url="file://$USER_HOME$/Library/Android/sdk/flutter/packages/flutter_web_plugins/lib" />
     </CLASSES>
