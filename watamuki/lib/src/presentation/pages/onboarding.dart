@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,26 +16,23 @@ class Onboarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        body: ConstrainedBox(
-          constraints: const BoxConstraints.expand(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Onboarding',
-              ),
-              Button(
-                onPressed: () async {
-                  context.read<OnboardingProvider>().onboardingFinish();
-                  Navigator.pushReplacementNamed(context, HomePage.routeName);
-                },
-                label: "Get started",
-              )
-            ],
-          ),
+    return Scaffold(
+      body: ConstrainedBox(
+        constraints: const BoxConstraints.expand(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              tr('Onboarding'),
+            ),
+            Button(
+              onPressed: () async {
+                context.read<OnboardingProvider>().onboardingFinish();
+                Navigator.pushReplacementNamed(context, HomePage.routeName);
+              },
+              label: "Get started",
+            )
+          ],
         ),
       ),
     );
