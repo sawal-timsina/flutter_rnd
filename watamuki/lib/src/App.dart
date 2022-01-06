@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
@@ -50,7 +51,10 @@ class App extends StatelessWidget {
                   Provider.of<AuthProvider>(context, listen: false).loggedIn;
               return AppRouter.onGenerateRoutes(settings, loggedIn);
             },
-            localizationsDelegates: context.localizationDelegates,
+            localizationsDelegates: [
+              FormBuilderLocalizations.delegate,
+              ...context.localizationDelegates
+            ],
             supportedLocales: context.supportedLocales,
           );
         });
