@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,17 +39,19 @@ class App extends StatelessWidget {
         return Sizer(builder: (_, orientation, deviceType) {
           return MaterialApp(
             debugShowCheckedModeBanner: kDebugMode,
-            title: "Watamuki",
+            title: tr("Watamuki"),
             theme: AppTheme.light,
             initialRoute:
-            context.watch<OnboardingProvider>().shouldShowOnboardingPage
-                ? Onboarding.routeName
-                : HomePage.routeName,
+                context.watch<OnboardingProvider>().shouldShowOnboardingPage
+                    ? Onboarding.routeName
+                    : HomePage.routeName,
             onGenerateRoute: (settings) {
               bool loggedIn =
                   Provider.of<AuthProvider>(context, listen: false).loggedIn;
               return AppRouter.onGenerateRoutes(settings, loggedIn);
             },
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
           );
         });
       },
