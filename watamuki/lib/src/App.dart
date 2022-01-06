@@ -12,6 +12,10 @@ import 'presentation/providers/auth_provider.dart';
 import 'presentation/providers/onboarding_provider.dart';
 
 class App extends StatelessWidget {
+  static void dismissKeyboard() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
   const App({
     Key? key,
     required this.sharedPreferences,
@@ -37,9 +41,9 @@ class App extends StatelessWidget {
             title: "Watamuki",
             theme: AppTheme.light,
             initialRoute:
-                context.watch<OnboardingProvider>().shouldShowOnboardingPage
-                    ? Onboarding.routeName
-                    : HomePage.routeName,
+            context.watch<OnboardingProvider>().shouldShowOnboardingPage
+                ? Onboarding.routeName
+                : HomePage.routeName,
             onGenerateRoute: (settings) {
               bool loggedIn =
                   Provider.of<AuthProvider>(context, listen: false).loggedIn;
