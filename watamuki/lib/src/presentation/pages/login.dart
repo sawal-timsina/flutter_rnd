@@ -44,8 +44,8 @@ class LoginPage extends StatelessWidget {
                     onChanged: (_) {
                       _formKey.currentState?.fields['email']?.validate();
                     },
-                    labelText: "Email address/Mobile number",
-                    hintText: "Enter your email address/phone number",
+                    labelText: tr("Email address/Mobile number"),
+                    hintText: tr("Enter your email address/phone number"),
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(context),
                       FormBuilderValidators.email(context),
@@ -57,7 +57,8 @@ class LoginPage extends StatelessWidget {
                     name: "password",
                     required: true,
                     obscureText: true,
-                    labelText: "Password",
+                    hintText: tr("Enter your password"),
+                    labelText: tr("Password"),
                     // maxLength: context.locale.toString() == 'ja_JP' ? 11 : 10,
                     // showCounter: false,
                     onChanged: (_) {
