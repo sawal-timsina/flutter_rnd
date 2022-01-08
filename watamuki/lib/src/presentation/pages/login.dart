@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:watamuki/src/App.dart';
-import 'package:watamuki/src/config/firebase/firebase.dart';
+import 'package:watamuki/src/config/firebase/auth.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/text_input.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/page_header.dart';
@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline3,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   TextInput(
                     name: 'email',
                     required: true,

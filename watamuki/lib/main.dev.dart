@@ -1,23 +1,28 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/App.dart';
-import 'src/config/firebase/firebase.dart';
+import 'src/config/firebase/default_firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
 
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+  await dotenv.load(fileName: ".dev.env");
+
+  await EasyLocalization.ensureInitialized();
+
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.options(dotenv.env),
   );
 
   runApp(
     EasyLocalization(
-      startLocale: const Locale('ja', 'JP'),
+      startLocale: const Locale('en', 'US'),
       supportedLocales: const [
         Locale('en', 'US'),
         Locale('ja', 'JP'),

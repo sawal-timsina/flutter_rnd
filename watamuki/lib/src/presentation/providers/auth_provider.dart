@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:watamuki/src/config/firebase/firebase.dart';
+import 'package:watamuki/src/config/firebase/auth.dart' show firebaseAuth;
 
 class AuthProvider with ChangeNotifier {
   AuthProvider() : super() {

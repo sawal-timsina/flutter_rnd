@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:watamuki/src/config/firebase/firebase.dart';
+import 'package:watamuki/src/config/firebase/auth.dart' show firebaseAuth;
 import 'package:watamuki/src/config/themes/colors.dart';
 import 'package:watamuki/src/presentation/pages/demo.dart';
 import 'package:watamuki/src/presentation/providers/auth_provider.dart';
@@ -109,56 +109,59 @@ class CustomDrawer extends StatelessWidget {
       bottom: defaultTargetPlatform != TargetPlatform.iOS,
       child: ClipRRect(
         borderRadius:
-        const BorderRadius.horizontal(right: Radius.circular(32.0)),
+            const BorderRadius.horizontal(right: Radius.circular(32.0)),
         child: Container(
           constraints: BoxConstraints.tight(
               Size(SizerUtil.width - 72, SizerUtil.height)),
           child: Drawer(
             child: SafeArea(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: ListView(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 32),
-                        children: <Widget>[
-                          const DrawerTopHeader(),
-                          Consumer<AuthProvider>(builder: (context, value, child) {
-                            return value.loggedIn
-                                ? Column(children: _renderAuthMenus(context))
-                                : const SizedBox.shrink();
-                          }),
-                          ..._renderDefaultMenus(context),
-                          Consumer<AuthProvider>(builder: (context, value, child) {
-                            return value.loggedIn
-                                ? Column(children: _renderAuthMenusFooter())
-                                : const SizedBox.shrink();
-                          }),
-                        ],
-                      ),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 32),
+                      children: <Widget>[
+                        const DrawerTopHeader(),
+                        Consumer<AuthProvider>(
+                            builder: (context, value, child) {
+                          return value.loggedIn
+                              ? Column(children: _renderAuthMenus(context))
+                              : const SizedBox.shrink();
+                        }),
+                        ..._renderDefaultMenus(context),
+                        Consumer<AuthProvider>(
+                            builder: (context, value, child) {
+                          return value.loggedIn
+                              ? Column(children: _renderAuthMenusFooter())
+                              : const SizedBox.shrink();
+                        }),
+                      ],
                     ),
-                    Padding(
-                      padding: defaultTargetPlatform == TargetPlatform.iOS
-                          ? const EdgeInsets.only(top: 16, left: 24, right: 24)
-                          : const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 24),
-                      child: Row(
-                        children: <Widget>[
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 48,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        tr("Watamuki"),
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                    ],
-                      ),
-                    )
-                  ],
-                )),
+                  ),
+                  Padding(
+                    padding: defaultTargetPlatform == TargetPlatform.iOS
+                        ? const EdgeInsets.only(top: 16, left: 24, right: 24)
+                        : const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 24),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 48,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        const SizedBox(width: 16),
+                        Text(
+                          tr("Watamuki"),
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
