@@ -85,7 +85,7 @@ class DrawerTopHeader extends StatelessWidget {
       builder: (context, value, child) {
         return value.loggedIn
             ? _columnViewRender(
-                _renderAuthView(context, value.user?.displayName))
+                _renderAuthView(context, value.dbUser?.nickName))
             : _columnViewRender(_renderDefaultView(context));
       },
     );
