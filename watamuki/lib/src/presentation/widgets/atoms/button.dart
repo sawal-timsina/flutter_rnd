@@ -22,7 +22,7 @@ class Button extends StatefulWidget {
   final bool? disabled;
   final bool disableBorder;
   final TextStyle? textStyle;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsets? padding;
 
   const Button({
     Key? key,
@@ -42,29 +42,11 @@ class Button extends StatefulWidget {
 }
 
 class _ButtonState extends State<Button> {
-  late double _sizeValue;
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _sizeValue = widget.size == ButtonSize.small
-          ? 8
-          : widget.size == ButtonSize.medium
-              ? 12
-              : 16;
-    });
-  }
-
-  @override
-  void didUpdateWidget(covariant Button oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _sizeValue = widget.size == ButtonSize.small
-        ? 8
-        : widget.size == ButtonSize.medium
-            ? 12
-            : 16;
-  }
+  final Map<ButtonSize, double> sizeValue = {
+    ButtonSize.small: 8,
+    ButtonSize.medium: 12,
+    ButtonSize.large: 16,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +58,10 @@ class _ButtonState extends State<Button> {
       disabledElevation: 0,
       highlightElevation: 0,
       constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
-      padding: widget.padding ??
-          EdgeInsets.symmetric(vertical: _sizeValue, horizontal: _sizeValue),
+      padding: EdgeInsets.symmetric(
+          vertical: sizeValue[widget.size] ?? 0,
+          horizontal: sizeValue[widget.size] ?? 0),
+      // .merge(widget.padding),
       textStyle: (widget.size == ButtonSize.large
               ? Theme.of(context).textTheme.button
               : widget.size == ButtonSize.medium
@@ -109,8 +93,8 @@ class _ButtonState extends State<Button> {
         side: widget.disabled! || widget.type != ButtonType.outlined
             ? BorderSide.none
             : BorderSide(color: Theme.of(context).primaryColor, width: 1),
-        borderRadius: BorderRadius.all(
-            Radius.circular(widget.disableBorder ? 0 : _sizeValue)),
+        borderRadius: BorderRadius.all(Radius.circular(
+            widget.disableBorder ? 0 : sizeValue[widget.size] ?? 0)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
