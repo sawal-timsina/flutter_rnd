@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/facilities.dart';
 
 class BottomNavBar extends StatefulWidget {
   final Function(int index) onTap;
@@ -47,22 +49,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
               });
               widget.onTap(value);
             },
-            items: const [
-              BottomNavigationBarItem(
+            items: [
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
                 label: 'Top',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.local_activity_outlined),
                 label: 'Coupon',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.local_police_outlined),
                 label: 'Stamp',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.grid_view),
-                label: 'Facilities',
+                icon: const Icon(Icons.grid_view),
+                label: tr(FacilitiesPage.routeName),
               ),
             ],
           ),
@@ -71,20 +73,3 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 }
-
-/*
-class _BottomNavBarState extends State<BottomNavBar> {
-  HomePage _homePage = HomePage([TopPage.routeName], 0);
-
-  @override
-  void initState() {
-    super.initState();
-    widget.tabsChangeNotifier.addListener(() {
-      print("bottom nav state changed");
-      setState(() {
-        _homePage = widget.tabsChangeNotifier.value;
-      });
-    });
-  }
-}
-*/
