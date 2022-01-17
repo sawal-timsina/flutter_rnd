@@ -84,11 +84,14 @@ class AppRouter {
       case TownInformationPage.routeName:
         return _homeRoute(const TownInformationPage(), settings);
       case TownInfoDetailPage.routeName:
-        return _homeRoute(const TownInfoDetailPage(), settings);
+        return _homeRoute(const TownInfoDetailPage(), settings,
+            hasPadding: true);
       case SpecialFeaturePage.routeName:
-        return _homeRoute(const SpecialFeaturePage(), settings);
+        return _homeRoute(const SpecialFeaturePage(), settings,
+            hasPadding: true);
       case FacilityDetailPage.routeName:
-        return _homeRoute(const FacilityDetailPage(), settings);
+        return _homeRoute(const FacilityDetailPage(), settings,
+            hasPadding: true);
       default:
         throw const FormatException('Route not found');
     }
@@ -99,11 +102,14 @@ class AppRouter {
   }
 
   static PageRouteBuilder<dynamic> _homeRoute(
-      Widget view, RouteSettings settings) {
+      Widget view, RouteSettings settings,
+      {bool hasPadding = false}) {
     return PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
           return Container(
             color: Colors.white,
+            padding:
+                hasPadding ? const EdgeInsets.all(20) : const EdgeInsets.all(0),
             child: view,
           );
         },
