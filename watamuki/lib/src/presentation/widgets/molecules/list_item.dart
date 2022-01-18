@@ -29,23 +29,6 @@ class ListItem<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle? titleStyle = Theme.of(context).textTheme.bodyText1;
-
-    TextStyle? subTitleStyle = Theme.of(context)
-        .textTheme
-        .caption
-        ?.copyWith(color: AppColors.greyDark);
-
-    TextStyle? captionTextStyle = Theme.of(context)
-        .textTheme
-        .caption
-        ?.copyWith(color: AppColors.greyDark);
-
-    TextStyle? actionTextStyle = Theme.of(context).textTheme.caption?.copyWith(
-          color: Theme.of(context).primaryColor,
-          decoration: TextDecoration.underline,
-        );
-
     return Container(
       constraints: const BoxConstraints(
         minHeight: 104,
@@ -77,7 +60,7 @@ class ListItem<T> extends StatelessWidget {
                     title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: titleStyle,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                   if (subTitle != null) ...[
                     const SizedBox(height: 8),
@@ -85,7 +68,10 @@ class ListItem<T> extends StatelessWidget {
                       subTitle!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: subTitleStyle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption
+                          ?.copyWith(color: AppColors.greyDark),
                     )
                   ],
                   if (captionTitle != null) ...[
@@ -96,7 +82,10 @@ class ListItem<T> extends StatelessWidget {
                       title: captionTitle!,
                       padding: const EdgeInsets.symmetric(
                           vertical: 0.1, horizontal: 0.1),
-                      textStyle: captionTextStyle,
+                      textStyle: Theme.of(context)
+                          .textTheme
+                          .caption
+                          ?.copyWith(color: AppColors.greyDark),
                     )
                   ],
                   if (actionTitle != null) ...[
@@ -105,7 +94,10 @@ class ListItem<T> extends StatelessWidget {
                       onTap: onActionTap,
                       child: Text(
                         actionTitle!,
-                        style: actionTextStyle,
+                        style: Theme.of(context).textTheme.caption?.copyWith(
+                              color: Theme.of(context).primaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
                       ),
                     )
                   ],
