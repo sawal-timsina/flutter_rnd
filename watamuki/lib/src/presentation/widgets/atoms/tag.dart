@@ -41,8 +41,8 @@ class Tag extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            Icons.grid_view,
-            color: textColor[type],
+            icon,
+            color: textStyle?.color ?? textColor[type],
           ),
           const SizedBox(width: 8),
           Text(
@@ -50,8 +50,8 @@ class Tag extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .caption
-                ?.merge(textStyle)
-                .copyWith(color: textColor[type]),
+                ?.copyWith(color: textColor[type])
+                .merge(textStyle),
           ),
         ],
       ),
