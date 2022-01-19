@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watamuki/src/App.dart';
 import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/config/api/json_converters.dart';
 import 'package:watamuki/src/config/firebase/default_firebase_options.dart';
 
 void main() async {
@@ -22,10 +21,7 @@ void main() async {
   );
 
   // init api
-  Api(
-    baseUrl: dotenv.env["API_URL"].toString(),
-    converter: JsonConverters()(),
-  );
+  InitApi()();
 
   runApp(
     EasyLocalization(

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 import 'package:watamuki/src/config/api/api.dart';
 import 'package:watamuki/src/config/firebase/auth.dart' show firebaseAuth;
-import 'package:watamuki/src/data/data_sources/remote/user_service.dart';
+import 'package:watamuki/src/data/data_sources/remote/user/user_service.dart';
 import 'package:watamuki/src/data/models/user_modal.dart';
 
 class AuthProvider with ChangeNotifier {
