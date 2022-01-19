@@ -1,5 +1,7 @@
 import 'package:watamuki/src/core/utils/json_serializable_converter.dart';
+import 'package:watamuki/src/data/models/facility/facility.dart';
 import 'package:watamuki/src/data/models/responses/data_response_modal.dart';
+import 'package:watamuki/src/data/models/responses/list_response_modal.dart';
 import 'package:watamuki/src/data/models/user_modal.dart';
 
 class JsonConverters {
@@ -9,6 +11,10 @@ class JsonConverters {
     return JsonSerializableConverter({
       DataResponse<UserModal>: (json) =>
           DataResponse<UserModal>.fromJson(json, UserModal.fromJson),
+      ListResponse<List<Facility>>: (json) =>
+          ListResponse<List<Facility>>.fromJson(json, (json) {
+            return json.map((e) => Facility.fromJson(e)).toList();
+          }),
     });
   }
 }
