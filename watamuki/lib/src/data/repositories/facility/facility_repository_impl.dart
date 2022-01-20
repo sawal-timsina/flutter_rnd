@@ -10,9 +10,12 @@ class FacilityRepositoryImpl implements FacilityRepository {
   final FacilityService facilityService = kAPI.getService<FacilityService>();
 
   @override
-  Future<DataState<List<Facility>>> getAllPublicFacility() async {
+  Future<DataState<List<Facility>>> getAllPublicFacility(params) async {
     try {
-      final response = await facilityService.getAllFacilities();
+      final response = await facilityService.getAllFacilities(
+        area: params.area,
+        categoryId: params.categoryId,
+      );
 
       if (response.statusCode != HttpStatus.ok) {
         return DataError(response.bodyString);

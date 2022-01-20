@@ -17,9 +17,11 @@ class _$FacilityService extends FacilityService {
   final definitionType = FacilityService;
 
   @override
-  Future<Response<ListResponse<List<Facility>>>> getAllFacilities() {
+  Future<Response<ListResponse<List<Facility>>>> getAllFacilities(
+      {String? area, int? categoryId}) {
     final $url = '/facilities/public';
-    final $request = Request('GET', $url, client.baseUrl);
+    final $params = <String, dynamic>{'area': area, 'category_id': categoryId};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<ListResponse<List<Facility>>, Facility>($request);
   }
 }
