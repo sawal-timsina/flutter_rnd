@@ -1,5 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/core/params/category.dart';
+import 'package:watamuki/src/core/params/facility.dart';
+import 'package:watamuki/src/data/models/category/category.dart';
+import 'package:watamuki/src/data/models/facility/facility.dart';
+import 'package:watamuki/src/data/repositories/category/category_repository.dart';
+import 'package:watamuki/src/data/repositories/facility/facility_repository.dart';
+import 'package:watamuki/src/data/repositories/facility/facility_repository_impl.dart';
+import 'package:watamuki/src/injector.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
 import 'package:watamuki/src/presentation/widgets/atoms/tag.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/category_tab_bar.dart';
@@ -10,8 +18,11 @@ import 'home_navigator.dart';
 
 class FacilitiesPage extends StatefulWidget {
   static const routeName = 'facilities';
+  final FacilityRepository _facilityRepository = FacilityRepositoryImpl();
+  final CategoryRepository _categoryRepository =
+      getIt.get<CategoryRepository>();
 
-  const FacilitiesPage({Key? key}) : super(key: key);
+  FacilitiesPage({Key? key}) : super(key: key);
 
   @override
   State<FacilitiesPage> createState() => _FacilitiesPageState();
@@ -19,6 +30,48 @@ class FacilitiesPage extends StatefulWidget {
 
 class _FacilitiesPageState extends State<FacilitiesPage>
     with AutomaticKeepAliveClientMixin<FacilitiesPage> {
+  bool categoryLoading = false;
+  List<Category> categories = [];
+
+  late Category selectedCategory;
+
+  bool facilityLoading = false;
+  List<Facility> facilities = [];
+
+  Future<bool> getAllCategory() async {
+    setState(() {
+      categoryLoading = true;
+    });
+    final response = await widget._categoryRepository.getAllPublicCategory(
+        CategoryParams(type: CategoryType.facility.value));
+    setState(() {
+      categories = response.data as List<Category>;
+      categoryLoading = false;
+      selectedCategory = categories[0];
+    });
+    return categoryLoading;
+  }
+
+  Future<bool> getAllFacility() async {
+    setState(() {
+      facilityLoading = true;
+    });
+    final response = await widget._facilityRepository
+        .getAllPublicFacility(FacilityParams(categoryId: selectedCategory.id));
+    setState(() {
+      facilityLoading = false;
+      facilities = response.data as List<Facility>;
+    });
+    return facilityLoading;
+  }
+
+  @override
+  void initState() {
+    getAllCategory();
+    getAllFacility();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -55,35 +108,40 @@ class _FacilitiesPageState extends State<FacilitiesPage>
             ),
           ),
           const SizedBox(height: 8),
-          CategoryTabBar<Map>(
+          CategoryTabBar<Category>(
             itemKey: "name",
-            tabs: const [
-              {"name": "Cat1"},
-              {"name": "Cat2"},
-              {"name": "Cat3"},
-            ],
+            tabs: categories,
             onTap: (value) {
-              print(value);
+              setState(() {
+                selectedCategory = value;
+              });
+              getAllFacility();
             },
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 20,
-              itemBuilder: (BuildContext context, int index) {
-                return ListItem(
-                  title: "日野の歴史ある名所」を巡るサイクリングスタンプラリーを開催します！",
-                  subTitle: "日野の歴史ある名所」を巡るサイクリングスタンプラリーを開催します！",
-                  imageSrc:
-                      "https://storage.googleapis.com/watamuki-development/images/original/1640347742921780511.jpg",
-                  actionTitle: "マップで開く",
-                  onTap: () {
-                    print(index);
-                  },
-                  onActionTap: () {
-                    print({"title": "open in map", "index": index});
-                  },
-                );
+            child: RefreshIndicator(
+              onRefresh: () async {
+                bool loading = await getAllCategory();
+                loading = await getAllFacility();
+                return Future.value(loading);
               },
+              child: ListView.builder(
+                itemCount: facilities.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListItem(
+                    title: facilities[index].name,
+                    subTitle: facilities[index].overview,
+                    imageSrc: facilities[index].image,
+                    actionTitle: "マップで開く",
+                    onTap: () {
+                      print(index);
+                    },
+                    onActionTap: () {
+                      print({"title": "open in map", "index": index});
+                    },
+                  );
+                },
+              ),
             ),
           )
         ],
