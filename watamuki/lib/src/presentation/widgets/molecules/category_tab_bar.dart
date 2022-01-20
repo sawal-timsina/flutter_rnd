@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
+import 'package:watamuki/src/data/models/index.dart';
 
 class CategoryTabBar<T> extends StatelessWidget {
   final List<T> tabs;
@@ -35,7 +36,7 @@ class CategoryTabBar<T> extends StatelessWidget {
             String title = "undefined";
             if (e is String) {
               title = e.toString();
-            } else if (e is Map) {
+            } else if (e is Indexable) {
               title = e[itemKey].toString();
             }
             return Padding(
