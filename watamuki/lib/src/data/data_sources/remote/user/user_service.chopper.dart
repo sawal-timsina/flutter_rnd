@@ -17,9 +17,9 @@ class _$UserService extends UserService {
   final definitionType = UserService;
 
   @override
-  Future<Response<DataResponse<UserModal>>> getAuthUser() {
+  Future<Response<DataResponse<User>>> getAuthUser() {
     final $url = '/users/auth';
     final $request = Request('GET', $url, client.baseUrl);
-    return client.send<DataResponse<UserModal>, UserModal>($request);
+    return client.send<DataResponse<User>, User>($request);
   }
 }

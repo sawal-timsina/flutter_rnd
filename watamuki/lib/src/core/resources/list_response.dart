@@ -1,7 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:watamuki/src/core/resources/data_state.dart';
 
-@JsonSerializable(genericArgumentFactories: true)
 class ListResponse<T> extends DataSuccess<T> {
   ListResponse({required T data}) : super(data);
 

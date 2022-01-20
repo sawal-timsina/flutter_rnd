@@ -1,15 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/config/firebase/auth.dart' show firebaseAuth;
-import 'package:watamuki/src/data/data_sources/remote/user/user_service.dart';
-import 'package:watamuki/src/data/models/user_modal.dart';
+import 'package:watamuki/src/config/firebase/auth.dart';
+import 'package:watamuki/src/data/models/user/user.dart';
+import 'package:watamuki/src/data/repositories/user/user_repository.dart';
+import 'package:watamuki/src/injector.dart';
 
 class AuthProvider with ChangeNotifier {
-  late UserModal? _dbUser;
+  final UserRepository _userRepository = getIt.get<UserRepository>();
+  late User? _dbUser;
 
   AuthProvider() : super() {
-    firebaseAuth.authStateChanges().listen((User? user) {
+    firebaseAuth.authStateChanges().listen((auth.User? user) {
       if (user != null) {
         _user = user;
         _loggedIn = true;
@@ -25,16 +26,13 @@ class AuthProvider with ChangeNotifier {
     });
   }
 
-  void getAuthUser() {
-    kAPI.getService<UserService>().getAuthUser().then((res) {
-      _dbUser = res.body?.data;
-      _phoneVerified = (_dbUser?.isPhoneVerified)!;
-      _phoneNumber = (_dbUser?.phone)!;
-      notifyListeners();
-    });
+  void getAuthUser() async {
+    final response = await _userRepository.getDbUser();
+    _dbUser = response.data;
+    notifyListeners();
   }
 
-  UserModal? get dbUser => _dbUser;
+  User? get dbUser => _dbUser;
 
   bool _loggedIn = false;
 
@@ -54,11 +52,11 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  User? _user;
+  auth.User? _user;
 
-  User? get user => _user;
+  auth.User? get user => _user;
 
-  void setUser(User? user) {
+  void setUser(auth.User? user) {
     _user = user;
     notifyListeners();
   }
