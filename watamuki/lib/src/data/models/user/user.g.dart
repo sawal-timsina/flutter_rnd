@@ -6,9 +6,8 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserModalFromJson(Map<String, dynamic> json) => User(
+User _$UserFromJson(Map<String, dynamic> json) => User(
       id: json['id'] as int,
-      isPhoneVerified: json['is_phone_verified'] as bool,
       firebaseUid: json['firebase_uid'] as String,
       nickName: json['nick_name'] as String,
       email: json['email'] as String,
@@ -17,11 +16,12 @@ User _$UserModalFromJson(Map<String, dynamic> json) => User(
       gender: json['gender'] as String,
       phone: json['phone'] as String,
       age: json['age'] as String,
+      isPhoneVerified: json['is_phone_verified'] as bool,
       updatedAt: json['updated_at'] as String,
       createdAt: json['created_at'] as String,
     );
 
-Map<String, dynamic> _$UserModalToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'is_phone_verified': instance.isPhoneVerified,
       'firebase_uid': instance.firebaseUid,

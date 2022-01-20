@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
+import 'package:watamuki/src/core/resources/list_response.dart';
 import 'package:watamuki/src/data/models/facility/facility.dart';
-import 'package:watamuki/src/data/models/responses/list_response_modal.dart';
 
 part 'facility_service.chopper.dart';
 
