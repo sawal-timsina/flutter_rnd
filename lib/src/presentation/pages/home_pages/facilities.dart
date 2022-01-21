@@ -33,7 +33,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
   bool categoryLoading = false;
   List<Category> categories = [];
 
-  late Category selectedCategory;
+  late Category selectedCategory = Category(id: 0, name: "");
 
   bool facilityLoading = false;
   List<Facility> facilities = [];
@@ -47,7 +47,9 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     setState(() {
       categories = response.data as List<Category>;
       categoryLoading = false;
-      selectedCategory = categories[0];
+      if (selectedCategory.id == 0) {
+        selectedCategory = categories[0];
+      }
     });
     return categoryLoading;
   }
@@ -65,10 +67,15 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     return facilityLoading;
   }
 
+  Future<bool> refresh() async {
+    bool loading = await getAllCategory();
+    loading = await getAllFacility();
+    return Future.value(loading);
+  }
+
   @override
   void initState() {
-    getAllCategory();
-    getAllFacility();
+    refresh();
     super.initState();
   }
 
@@ -120,11 +127,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
           ),
           Expanded(
             child: RefreshIndicator(
-              onRefresh: () async {
-                bool loading = await getAllCategory();
-                loading = await getAllFacility();
-                return Future.value(loading);
-              },
+              onRefresh: refresh,
               child: ListView.builder(
                 itemCount: facilities.length,
                 itemBuilder: (BuildContext context, int index) {
