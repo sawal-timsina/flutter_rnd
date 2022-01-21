@@ -7,9 +7,10 @@ import 'package:watamuki/src/injector.dart';
 
 class AuthProvider with ChangeNotifier {
   final UserRepository _userRepository = getIt.get<UserRepository>();
-  late User? _dbUser;
+  User? _dbUser;
 
   AuthProvider() : super() {
+    _dbUser = null;
     firebaseAuth.authStateChanges().listen((auth.User? user) {
       if (user != null) {
         _user = user;
