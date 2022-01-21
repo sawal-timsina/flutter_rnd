@@ -30,41 +30,32 @@ class FacilitiesPage extends StatefulWidget {
 
 class _FacilitiesPageState extends State<FacilitiesPage>
     with AutomaticKeepAliveClientMixin<FacilitiesPage> {
-  bool categoryLoading = false;
   List<Category> categories = [];
 
   late Category selectedCategory = Category(id: 0, name: "");
 
-  bool facilityLoading = false;
   List<Facility> facilities = [];
 
   Future<bool> getAllCategory() async {
-    setState(() {
-      categoryLoading = true;
-    });
     final response = await widget._categoryRepository.getAllPublicCategory(
         CategoryParams(type: CategoryType.facility.value));
     setState(() {
       categories = response.data as List<Category>;
-      categoryLoading = false;
       if (selectedCategory.id == 0) {
         selectedCategory = categories[0];
       }
     });
-    return categoryLoading;
+    return true;
   }
 
   Future<bool> getAllFacility() async {
+    final response = await widget._facilityRepository.getAllPublicFacility(
+      FacilityParams(categoryId: selectedCategory.id),
+    );
     setState(() {
-      facilityLoading = true;
-    });
-    final response = await widget._facilityRepository
-        .getAllPublicFacility(FacilityParams(categoryId: selectedCategory.id));
-    setState(() {
-      facilityLoading = false;
       facilities = response.data as List<Facility>;
     });
-    return facilityLoading;
+    return true;
   }
 
   Future<bool> refresh() async {
