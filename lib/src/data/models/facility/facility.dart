@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:watamuki/src/data/models/index.dart';
 
 part 'facility.g.dart';
 
 @JsonSerializable()
-class Facility {
+class Facility extends Indexable {
   final int id;
   final String name;
   final String image;
@@ -13,7 +14,7 @@ class Facility {
   @JsonKey(name: "created_at")
   final String createdAt;
 
-  const Facility({
+  Facility({
     required this.id,
     required this.name,
     required this.image,
@@ -25,5 +26,6 @@ class Facility {
   factory Facility.fromJson(Map<String, dynamic> json) =>
       _$FacilityFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$FacilityToJson(this);
 }
