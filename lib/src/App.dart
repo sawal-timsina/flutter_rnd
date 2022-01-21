@@ -1,9 +1,17 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:chopper/chopper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:watamuki/src/core/params/index.dart';
+import 'package:watamuki/src/core/resources/data_state.dart';
+import 'package:watamuki/src/injector.dart';
 
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
@@ -41,9 +49,8 @@ class App extends StatelessWidget {
                     ? Onboarding.routeName
                     : HomePage.routeName,
             onGenerateRoute: (settings) {
-              bool loggedIn =
-                  Provider.of<AuthProvider>(context, listen: false).loggedIn;
-              return AppRouter.onGenerateRoutes(settings, loggedIn);
+              return AppRouter.onGenerateRoutes(
+                  settings, Provider.of<AuthProvider>(context).loggedIn);
             },
             localizationsDelegates: [
               FormBuilderLocalizations.delegate,
