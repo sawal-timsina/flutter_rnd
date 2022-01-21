@@ -10,8 +10,6 @@ abstract class FacilityService extends ChopperService {
       _$FacilityService(client);
 
   @Get(path: "/public")
-  Future<Response<ListResponse<List<Facility>>>> getAllFacilities({
-    @Query("area") String? area,
-    @Query("category_id") int? categoryId,
-  });
+  Future<Response<ListResponse<List<Facility>>>> getAllFacilities(
+      @QueryMap() Map<String, dynamic> query);
 }
