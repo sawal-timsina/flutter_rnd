@@ -13,7 +13,7 @@ enum ButtonSize {
   large,
 }
 
-class Button extends StatefulWidget {
+class Button extends StatelessWidget {
   final String label;
   final Icon? icon;
   final GestureTapCallback onPressed;
@@ -24,7 +24,7 @@ class Button extends StatefulWidget {
   final TextStyle? textStyle;
   final EdgeInsets? padding;
 
-  const Button({
+  Button({
     Key? key,
     required this.onPressed,
     required this.label,
@@ -37,11 +37,6 @@ class Button extends StatefulWidget {
     this.disableBorder = false,
   }) : super(key: key);
 
-  @override
-  State<Button> createState() => _ButtonState();
-}
-
-class _ButtonState extends State<Button> {
   final Map<ButtonSize, double> sizeValue = {
     ButtonSize.small: 8,
     ButtonSize.medium: 12,
@@ -51,7 +46,7 @@ class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: widget.disabled! ? null : widget.onPressed,
+      onPressed: disabled! ? null : onPressed,
       elevation: 0,
       hoverElevation: 0,
       focusElevation: 0,
@@ -59,50 +54,47 @@ class _ButtonState extends State<Button> {
       highlightElevation: 0,
       constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
       padding: EdgeInsets.symmetric(
-          vertical: sizeValue[widget.size] ?? 0,
-          horizontal: sizeValue[widget.size] ?? 0),
-      // .merge(widget.padding),
-      textStyle: (widget.size == ButtonSize.large
+          vertical: sizeValue[size] ?? 0, horizontal: sizeValue[size] ?? 0),
+      // .merge(padding),
+      textStyle: (size == ButtonSize.large
               ? Theme.of(context).textTheme.button
-              : widget.size == ButtonSize.medium
+              : size == ButtonSize.medium
                   ? Theme.of(context).textTheme.subtitle1
                   : Theme.of(context).textTheme.bodyText1)
           ?.merge(
             TextStyle(
-              color: widget.disabled!
+              color: disabled!
                   ? Colors.white
-                  : widget.type == ButtonType.filled
+                  : type == ButtonType.filled
                       ? Colors.white
-                      : widget.type == ButtonType.outlined
+                      : type == ButtonType.outlined
                           ? Colors.green
                           : Colors.black87,
             ),
           )
-          .merge(widget.textStyle),
-      splashColor: widget.type == ButtonType.filled
+          .merge(textStyle),
+      splashColor: type == ButtonType.filled
           ? Theme.of(context).primaryColorDark
-          : widget.type == ButtonType.outlined
+          : type == ButtonType.outlined
               ? Theme.of(context).primaryColorLight
               : null,
-      fillColor: widget.disabled!
+      fillColor: disabled!
           ? AppColors.greyDark
-          : widget.type == ButtonType.filled
+          : type == ButtonType.filled
               ? Theme.of(context).primaryColor
               : null,
       shape: RoundedRectangleBorder(
-        side: widget.disabled! || widget.type != ButtonType.outlined
+        side: disabled! || type != ButtonType.outlined
             ? BorderSide.none
             : BorderSide(color: Theme.of(context).primaryColor, width: 1),
-        borderRadius: BorderRadius.all(Radius.circular(
-            widget.disableBorder ? 0 : sizeValue[widget.size] ?? 0)),
+        borderRadius: BorderRadius.all(
+            Radius.circular(disableBorder ? 0 : sizeValue[size] ?? 0)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ...(widget.icon != null
-              ? [widget.icon!, const SizedBox(width: 8)]
-              : []),
-          Text(widget.label),
+          ...(icon != null ? [icon!, const SizedBox(width: 8)] : []),
+          Text(label),
         ],
       ),
     );
