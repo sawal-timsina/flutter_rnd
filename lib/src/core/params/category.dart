@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:watamuki/src/core/params/index.dart';
+
+part 'category.g.dart';
+
 enum CategoryType { facility, townInfo, coupon }
 
 extension GetCategoryType on CategoryType {
@@ -13,10 +18,14 @@ extension GetCategoryType on CategoryType {
   }
 }
 
-class CategoryParams {
+@JsonSerializable()
+class CategoryParams implements Params {
   final String type;
 
   CategoryParams({
     this.type = "",
   });
+
+  @override
+  Map<String, dynamic> toJson() => _$CategoryParamsToJson(this);
 }
