@@ -74,10 +74,10 @@ class AppRouter {
             PageView(
                 controller: tabController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  TopPage(),
-                  CouponPage(),
-                  StampPage(),
+                children: [
+                  const TopPage(),
+                  const CouponPage(),
+                  const StampPage(),
                   FacilitiesPage(),
                 ]),
             settings);
