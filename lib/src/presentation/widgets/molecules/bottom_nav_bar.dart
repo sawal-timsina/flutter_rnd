@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/coupon.dart';
 import 'package:watamuki/src/presentation/pages/home_pages/facilities.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/stamp.dart';
+import 'package:watamuki/src/presentation/pages/home_pages/top.dart';
 
 class BottomNavBar extends StatefulWidget {
   final Function(int index) onTap;
@@ -18,14 +21,16 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndex = 0;
 
+  BorderRadius radius = const BorderRadius.only(
+      topRight: Radius.circular(24), topLeft: Radius.circular(24));
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(24), topLeft: Radius.circular(24)),
-        boxShadow: [
+        borderRadius: radius,
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.09),
             offset: Offset(0, -8),
@@ -35,8 +40,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
       ),
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(24), topLeft: Radius.circular(24)),
+        borderRadius: radius,
         child: Padding(
           padding: defaultTargetPlatform == TargetPlatform.iOS
               ? const EdgeInsets.only(top: 16)
@@ -50,17 +54,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
               widget.onTap(value);
             },
             items: [
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'Top',
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home_outlined),
+                label: tr(TopPage.routeName),
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.local_activity_outlined),
-                label: 'Coupon',
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.local_activity_outlined),
+                label: tr(CouponPage.routeName),
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.local_police_outlined),
-                label: 'Stamp',
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.local_police_outlined),
+                label: tr(StampPage.routeName),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.grid_view),
