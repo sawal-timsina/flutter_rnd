@@ -61,7 +61,8 @@ class Button extends StatelessWidget {
               : size == ButtonSize.medium
                   ? Theme.of(context).textTheme.subtitle1
                   : Theme.of(context).textTheme.bodyText1)
-          ?.merge(
+          ?.merge(textStyle)
+          .merge(
             TextStyle(
               color: disabled!
                   ? Colors.white
@@ -71,8 +72,7 @@ class Button extends StatelessWidget {
                           ? Colors.green
                           : Colors.black87,
             ),
-          )
-          .merge(textStyle),
+          ),
       splashColor: type == ButtonType.filled
           ? Theme.of(context).primaryColorDark
           : type == ButtonType.outlined
