@@ -49,8 +49,8 @@ class App extends StatelessWidget {
                     ? Onboarding.routeName
                     : HomePage.routeName,
             onGenerateRoute: (settings) {
-              return AppRouter.onGenerateRoutes(
-                  settings, Provider.of<AuthProvider>(context).loggedIn);
+              return AppRouter.onGenerateRoutes(settings,
+                  Provider.of<AuthProvider>(context, listen: false).loggedIn);
             },
             localizationsDelegates: [
               FormBuilderLocalizations.delegate,
