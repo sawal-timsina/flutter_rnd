@@ -8,13 +8,9 @@ import 'package:watamuki/src/data/repositories/category/category_repository.dart
 import 'package:watamuki/src/data/repositories/facility/facility_repository.dart';
 import 'package:watamuki/src/data/repositories/facility/facility_repository_impl.dart';
 import 'package:watamuki/src/injector.dart';
-import 'package:watamuki/src/presentation/widgets/atoms/button.dart';
-import 'package:watamuki/src/presentation/widgets/atoms/tag.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/category_tab_bar.dart';
 import 'package:watamuki/src/presentation/widgets/molecules/list_item.dart';
-
-import 'facility_detail.dart';
-import 'home_navigator.dart';
+import 'package:watamuki/src/presentation/widgets/molecules/title_bar.dart';
 
 class FacilitiesPage extends StatefulWidget {
   static const routeName = 'facilities';
@@ -32,9 +28,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     with AutomaticKeepAliveClientMixin<FacilitiesPage> {
   List<Category> categories = [];
 
-  late Category selectedCategory = Category(id: 0, name: "");
-
-  List<Facility> facilities = [];
+  Category selectedCategory = Category(id: 0, name: "");
 
   Future<bool> getAllCategory() async {
     final response = await widget._categoryRepository.getAllPublicCategory(
@@ -47,6 +41,8 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     });
     return true;
   }
+
+  List<Facility> facilities = [];
 
   Future<bool> getAllFacility() async {
     final response = await widget._facilityRepository.getAllPublicFacility(
@@ -75,37 +71,17 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     super.build(context);
     String title = FacilitiesPage.routeName;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Tag(
-                  title: tr(title),
-                  icon: Icons.grid_view,
-                  type: TagType.transparent,
-                  textStyle: Theme.of(context).textTheme.headline2,
-                  padding: const EdgeInsets.symmetric(horizontal: 0.1),
-                ),
-                Button(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  size: ButtonSize.medium,
-                  onPressed: () {
-                    homeNavigator.currentState
-                        ?.pushNamed(FacilityDetailPage.routeName);
-                  },
-                  label: tr("Search from area"),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 8),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TitleBar(title: tr(title), icon: Icons.grid_view),
+        const SizedBox(height: 8),
+        if (categories.isEmpty)
+          const Padding(
+            padding: EdgeInsets.only(top: 54),
+            child: LinearProgressIndicator(),
+          )
+        else
           CategoryTabBar<Category>(
             itemKey: "name",
             tabs: categories,
@@ -116,6 +92,12 @@ class _FacilitiesPageState extends State<FacilitiesPage>
               getAllFacility();
             },
           ),
+        if (facilities.isEmpty)
+          const Padding(
+            padding: EdgeInsets.only(top: 16),
+            child: Center(child: CircularProgressIndicator()),
+          )
+        else
           Expanded(
             child: RefreshIndicator(
               onRefresh: refresh,
@@ -138,8 +120,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
               ),
             ),
           )
-        ],
-      ),
+      ],
     );
   }
 
