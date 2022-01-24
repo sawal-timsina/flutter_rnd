@@ -76,7 +76,7 @@ class AppRouter {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   const TopPage(),
-                  const CouponPage(),
+                  CouponPage(),
                   const StampPage(),
                   FacilitiesPage(),
                 ]),

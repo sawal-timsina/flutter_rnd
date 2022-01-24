@@ -10,7 +10,6 @@ abstract class CategoryService extends ChopperService {
       _$CategoryService(client);
 
   @Get(path: "/public")
-  Future<Response<ListResponse<List<Category>>>> getAllCategory({
-    @Query("type") String? type,
-  });
+  Future<Response<ListResponse<List<Category>>>> getAllCategory(
+      @QueryMap() Map<String, dynamic> query);
 }

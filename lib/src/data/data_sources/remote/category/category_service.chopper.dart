@@ -18,9 +18,9 @@ class _$CategoryService extends CategoryService {
 
   @override
   Future<Response<ListResponse<List<Category>>>> getAllCategory(
-      {String? type}) {
+      Map<String, dynamic> query) {
     final $url = '/categories/public';
-    final $params = <String, dynamic>{'type': type};
+    final $params = query;
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<ListResponse<List<Category>>, Category>($request);
   }

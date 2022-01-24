@@ -12,7 +12,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   @override
   Future<ApiResponse<List<Category>>> getAllPublicCategory(params) async {
     try {
-      final response = await categoryService.getAllCategory(type: params.type);
+      final response = await categoryService.getAllCategory(params.toJson());
 
       if (response.statusCode != HttpStatus.ok) {
         return ErrorResponse(response.bodyString);
