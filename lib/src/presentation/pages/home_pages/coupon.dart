@@ -58,7 +58,7 @@ class _CouponPageState extends State<CouponPage>
       children: [
         TitleBar(title: tr(title), icon: Icons.local_activity_outlined),
         const SizedBox(height: 8),
-        if ([].isEmpty)
+        if (categories.isEmpty)
           const Padding(
             padding: EdgeInsets.only(top: 54),
             child: LinearProgressIndicator(),
@@ -66,7 +66,7 @@ class _CouponPageState extends State<CouponPage>
         else
           CategoryTabBar<Category>(
             itemKey: "name",
-            tabs: [],
+            tabs: categories,
             onTap: (value) {
               setState(() {
                 selectedCategory = value;
