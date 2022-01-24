@@ -1,14 +1,14 @@
-abstract class DataState<T> {
+abstract class ApiResponse<T> {
   final T? data;
   final String? msg;
 
-  const DataState({this.data, this.msg});
+  const ApiResponse({this.data, this.msg});
 }
 
-class DataSuccess<T> extends DataState<T> {
-  const DataSuccess(T data) : super(data: data);
+class SuccessResponse<T> extends ApiResponse<T> {
+  const SuccessResponse(T data) : super(data: data);
 }
 
-class DataError<T> extends DataState<T> {
-  const DataError(String msg) : super(msg: msg);
+class ErrorResponse<T> extends ApiResponse<T> {
+  const ErrorResponse(String msg) : super(msg: msg);
 }

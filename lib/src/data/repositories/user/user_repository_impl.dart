@@ -10,17 +10,17 @@ class UserRepositoryImpl implements UserRepository {
   final UserService userService = kAPI.getService<UserService>();
 
   @override
-  Future<DataState<User>> getDbUser() async {
+  Future<ApiResponse<User>> getDbUser() async {
     try {
       final response = await userService.getAuthUser();
 
       if (response.statusCode != HttpStatus.ok) {
-        return DataError(response.bodyString);
+        return ErrorResponse(response.bodyString);
       }
 
-      return DataSuccess<User>(response.body?.data as User);
+      return SuccessResponse<User>(response.body?.data as User);
     } on HttpException catch (e) {
-      return DataError(e.message);
+      return ErrorResponse(e.message);
     }
   }
 }

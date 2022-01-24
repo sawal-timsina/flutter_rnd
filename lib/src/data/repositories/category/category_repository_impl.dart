@@ -10,17 +10,18 @@ class CategoryRepositoryImpl extends CategoryRepository {
   final CategoryService categoryService = kAPI.getService<CategoryService>();
 
   @override
-  Future<DataState<List<Category>>> getAllPublicCategory(params) async {
+  Future<ApiResponse<List<Category>>> getAllPublicCategory(params) async {
     try {
       final response = await categoryService.getAllCategory(type: params.type);
 
       if (response.statusCode != HttpStatus.ok) {
-        return DataError(response.bodyString);
+        return ErrorResponse(response.bodyString);
       }
 
-      return DataSuccess<List<Category>>(response.body?.data as List<Category>);
+      return SuccessResponse<List<Category>>(
+          response.body?.data as List<Category>);
     } on HttpException catch (e) {
-      return DataError(e.message);
+      return ErrorResponse(e.message);
     }
   }
 }

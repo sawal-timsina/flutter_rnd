@@ -1,6 +1,6 @@
 import 'package:watamuki/src/core/resources/data_state.dart';
 
-class ListResponse<T> extends DataSuccess<T> {
+class ListResponse<T> extends SuccessResponse<T> {
   ListResponse({required T data}) : super(data);
 
   factory ListResponse.fromJson(
