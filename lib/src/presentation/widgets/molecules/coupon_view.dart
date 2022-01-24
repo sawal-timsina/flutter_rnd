@@ -52,7 +52,7 @@ class _CouponViewState extends State<CouponView> {
 
   void _onResize() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      if (context.size is Size) {
+      if (context.size is Size && _pos == 0.0) {
         setState(() {
           _pos = (cKey.currentContext
                       ?.findRenderObject()

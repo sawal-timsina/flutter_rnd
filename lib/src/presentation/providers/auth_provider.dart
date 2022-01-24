@@ -39,11 +39,6 @@ class AuthProvider with ChangeNotifier {
 
   bool get loggedIn => _loggedIn;
 
-  void setLoggedIn(bool loggedIn) {
-    _loggedIn = loggedIn;
-    notifyListeners();
-  }
-
   bool _phoneVerified = false;
 
   bool get phoneVerified => _phoneVerified;
@@ -56,11 +51,6 @@ class AuthProvider with ChangeNotifier {
   auth.User? _user;
 
   auth.User? get user => _user;
-
-  void setUser(auth.User? user) {
-    _user = user;
-    notifyListeners();
-  }
 
   String _phoneNumber = "";
 

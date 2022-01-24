@@ -22,13 +22,13 @@ void main() async {
 
   runApp(
     EasyLocalization(
+      path: 'assets/translations',
       startLocale: const Locale('ja', 'JP'),
       supportedLocales: const [
         Locale('en', 'US'),
         Locale('ja', 'JP'),
       ],
-      path: 'assets/translations',
-      child: App(),
+      child: const App(),
     ),
   );
 }
