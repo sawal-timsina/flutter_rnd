@@ -1,41 +1,47 @@
-import 'package:chopper/chopper.dart';
-
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
-class JsonSerializableConverter extends JsonConverter {
-  final Map<Type, JsonFactory> _factories;
+typedef ListFactory<T> = T Function(List<dynamic> list);
 
-  const JsonSerializableConverter(this._factories);
+abstract class Converter {
+  dynamic convert<ResultType>(dynamic data);
+}
 
-  R? _decodeMap<R, I>(Map<String, dynamic> values) {
-    final jsonFactory = _factories[R];
-    if (jsonFactory == null || jsonFactory is! JsonFactory<R>) {
+class JsonConverter extends Converter {
+  final Map<Type, JsonFactory> _jsonFactories;
+  final Map<Type, ListFactory> _listFactories;
+
+  JsonConverter(this._jsonFactories, this._listFactories);
+
+  R? _decodeMap<R>(Map<String, dynamic> values) {
+    final jsonFactory = _jsonFactories[R];
+    if (jsonFactory == null) {
       return null;
     }
-
     return jsonFactory(values);
   }
 
-  List<I> _decodeList<R, I>(List values) =>
-      values.where((v) => v != null).map<I>((v) => _decode<R, I>(v)).toList();
+  R? _decodeList<R>(List values) {
+    final jsonFactory = _listFactories[R];
+    if (jsonFactory == null) {
+      return null;
+    }
+    return jsonFactory(values);
+  }
 
-  dynamic _decode<R, I>(entity) {
+  dynamic _decode<R>(entity) {
     if (entity is Iterable) {
-      return _decodeList<R, I>(entity as List<dynamic>);
+      return _decodeList<R>(entity as List<dynamic>);
     }
 
     if (entity is Map) {
-      return _decodeMap<R, I>(entity as Map<String, dynamic>);
+      return _decodeMap<R>(entity as Map<String, dynamic>);
     }
 
     return entity;
   }
 
   @override
-  Response<ResultType> convertResponse<ResultType, Item>(Response response) {
-    final jsonRes = super.convertResponse(response);
-
-    return jsonRes.copyWith<ResultType>(
-        body: _decode<ResultType, Item>(jsonRes.body));
+  dynamic convert<ResultType>(dynamic data) {
+    return _decode<ResultType>(data);
   }
 }

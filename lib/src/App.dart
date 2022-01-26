@@ -7,10 +7,10 @@ import 'package:sizer/sizer.dart';
 
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
-import 'presentation/pages/home.dart';
-import 'presentation/pages/onboarding.dart';
-import 'presentation/providers/auth_provider.dart';
-import 'presentation/providers/onboarding_provider.dart';
+import 'pages/home.dart';
+import 'pages/onboarding.dart';
+import 'providers/auth_provider.dart';
+import 'providers/onboarding_provider.dart';
 
 class App extends StatelessWidget {
   static void dismissKeyboard() {

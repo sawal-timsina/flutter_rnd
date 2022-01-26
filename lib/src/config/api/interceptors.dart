@@ -1,17 +1,17 @@
-import 'dart:async';
 import 'dart:io';
 
-import 'package:chopper/chopper.dart';
+import 'package:dio/dio.dart';
 import 'package:watamuki/src/config/firebase/auth.dart';
 
-class AuthInterceptors extends RequestInterceptor {
+class DioAuthInterceptors extends Interceptor {
   @override
-  FutureOr<Request> onRequest(Request request) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     String? token = await firebaseAuth.currentUser?.getIdToken();
     if (token != null) {
-      request.headers
+      options.headers
           .addAll({HttpHeaders.authorizationHeader: "Bearer $token"});
     }
-    return request;
+    handler.next(options);
   }
 }

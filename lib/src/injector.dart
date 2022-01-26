@@ -1,21 +1,24 @@
-import 'package:get_it/get_it.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/data/repositories/category/category_repository.dart';
-import 'package:watamuki/src/data/repositories/category/category_repository_impl.dart';
-import 'package:watamuki/src/data/repositories/user/user_repository.dart';
-import 'package:watamuki/src/data/repositories/user/user_repository_impl.dart';
 
-final getIt = GetIt.instance;
+import 'config/firebase/default_firebase_options.dart';
 
-Future<void> initializeDependencies() async {
-  // init api
-  InitApi()();
+late SharedPreferences sharedPreferences;
 
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  getIt.registerSingleton<SharedPreferences>(sharedPreferences);
+Future<void> initializeDependencies(String env) async {
+  await EasyLocalization.ensureInitialized();
 
-  getIt.registerSingleton<UserRepository>(UserRepositoryImpl());
+  await dotenv.load(fileName: ".$env.env");
 
-  getIt.registerSingleton<CategoryRepository>(CategoryRepositoryImpl());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.options(dotenv.env),
+  );
+
+  // init dio
+  InitDio()();
+
+  sharedPreferences = await SharedPreferences.getInstance();
 }

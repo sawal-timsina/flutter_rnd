@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/presentation/pages/demo.dart';
-import 'package:watamuki/src/presentation/pages/home.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/coupon.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/facilities.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/facility_detail.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/special_feature.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/stamp.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/top.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/town_info_details.dart';
-import 'package:watamuki/src/presentation/pages/home_pages/town_information.dart';
-import 'package:watamuki/src/presentation/pages/login.dart';
-import 'package:watamuki/src/presentation/pages/onboarding.dart';
+import 'package:watamuki/src/pages/demo.dart';
+import 'package:watamuki/src/pages/home.dart';
+import 'package:watamuki/src/pages/home_pages/coupon.dart';
+import 'package:watamuki/src/pages/home_pages/facilities.dart';
+import 'package:watamuki/src/pages/home_pages/facility_detail.dart';
+import 'package:watamuki/src/pages/home_pages/special_feature.dart';
+import 'package:watamuki/src/pages/home_pages/stamp.dart';
+import 'package:watamuki/src/pages/home_pages/top.dart';
+import 'package:watamuki/src/pages/home_pages/town_info_details.dart';
+import 'package:watamuki/src/pages/home_pages/town_information.dart';
+import 'package:watamuki/src/pages/login.dart';
+import 'package:watamuki/src/pages/onboarding.dart';
 
 class AppRouter {
   static Route<dynamic> onGenerateRoutes(
@@ -74,10 +74,10 @@ class AppRouter {
             PageView(
                 controller: tabController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  const TopPage(),
+                children: const [
+                  TopPage(),
                   CouponPage(),
-                  const StampPage(),
+                  StampPage(),
                   FacilitiesPage(),
                 ]),
             settings);

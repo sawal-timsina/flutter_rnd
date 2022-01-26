@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   chopper: ^4.0.4
+  dio: ^4.0.4
   easy_localization: ^3.0.0
   equatable: ^2.0.3
   firebase_auth: ^3.3.5
@@ -42,6 +43,7 @@ dependencies:
   google_fonts: ^2.2.0
   json_annotation: ^4.4.0
   provider: ^6.0.2
+  rxdart: ^0.27.3
   shared_preferences: ^2.0.12
   sizer: ^2.0.15
 
