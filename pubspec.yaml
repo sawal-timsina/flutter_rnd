@@ -1,5 +1,5 @@
 name: watamuki
-description: A new Flutter project.
+description: Watamuki Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -27,10 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  chopper: ^4.0.4
   dio: ^4.0.4
   easy_localization: ^3.0.0
-  equatable: ^2.0.3
   firebase_auth: ^3.3.5
   firebase_core: ^1.11.0
   flutter:
@@ -50,7 +48,6 @@ dependencies:
 dev_dependencies:
   json_serializable: ^6.1.4
   build_runner: ^2.1.7
-  chopper_generator: ^4.0.3
 
   flutter_test:
     sdk: flutter
