@@ -1,4 +1,4 @@
-import 'package:watamuki/src/core/utils/json_serializable_converter.dart';
+import 'package:watamuki/src/core/QueryProviders/Converters/json_converter.dart';
 import 'package:watamuki/src/models/category/category.dart';
 import 'package:watamuki/src/models/facility/facility.dart';
 import 'package:watamuki/src/models/user/user.dart';

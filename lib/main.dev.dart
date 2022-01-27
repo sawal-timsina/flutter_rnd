@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/App.dart';
+import 'package:watamuki/src/config/api/json_factory.dart';
+import 'package:watamuki/src/core/QueryProviders/query_client_provider.dart';
 import 'package:watamuki/src/injector.dart';
 
 void main() async {
@@ -9,14 +11,17 @@ void main() async {
   await initializeDependencies("dev");
 
   runApp(
-    EasyLocalization(
-      path: 'assets/translations',
-      startLocale: const Locale('en', 'US'),
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('ja', 'JP'),
-      ],
-      child: const App(),
+    QueryClientProvider(
+      converter: jsonFactory,
+      child: EasyLocalization(
+        path: 'assets/translations',
+        startLocale: const Locale('en', 'US'),
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('ja', 'JP'),
+        ],
+        child: const App(),
+      ),
     ),
   );
 }

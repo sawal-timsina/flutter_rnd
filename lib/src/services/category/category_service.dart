@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/core/utils/query_provider.dart';
+import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 
 abstract class ICategoryService {
   Future<Response> getAllCategory({QueryContext? context});

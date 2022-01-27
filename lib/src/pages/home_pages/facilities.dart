@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 import 'package:watamuki/src/core/params/category.dart';
 import 'package:watamuki/src/core/params/facility.dart';
-import 'package:watamuki/src/core/utils/query_provider.dart';
 import 'package:watamuki/src/models/category/category.dart';
 import 'package:watamuki/src/models/facility/facility.dart';
 import 'package:watamuki/src/services/index.dart';
