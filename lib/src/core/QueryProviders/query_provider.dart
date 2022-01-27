@@ -1,27 +1,14 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:watamuki/src/core/QueryProviders/Converters/converter.dart';
+import 'package:watamuki/src/core/QueryProviders/converters/converter_not_found.dart';
+import 'package:watamuki/src/core/QueryProviders/models/modals.dart';
 import 'package:watamuki/src/core/QueryProviders/query_injectors.dart';
 import 'package:watamuki/src/core/params/index.dart';
 import 'package:watamuki/src/injector.dart';
-
-class QueryObject<T> {
-  T? data;
-  bool isLoading;
-  bool isFetching;
-
-  QueryObject({this.data, required this.isLoading, required this.isFetching});
-}
-
-class QueryContext {
-  List<dynamic> queries;
-
-  QueryContext({
-    required this.queries,
-  });
-}
 
 class QueryProvider<T extends dynamic> {
   final Converter converter = getItQuery.get<Converter>();
@@ -57,14 +44,18 @@ class QueryProvider<T extends dynamic> {
       }) {
     refetch = () async {
       _queryKey = [_query, params?.toJson()].toString();
-      _queryContext = QueryContext(queries: [_query, params]);
+      _queryContext = QueryContext(pageParam: [_query, params]);
 
       final hasData = sharedPreferences.containsKey(_queryKey);
       if (hasData) {
-        T cacheData = converter
-            .convert<T>(jsonDecode(sharedPreferences.get(_queryKey) as String));
-        _data.add(
-            QueryObject(isLoading: false, isFetching: true, data: cacheData));
+        try {
+          T cacheData = converter.convert<T>(
+              jsonDecode(sharedPreferences.get(_queryKey) as String));
+          _data.add(
+              QueryObject(isLoading: false, isFetching: true, data: cacheData));
+        } on ConverterNotFountException catch (e) {
+          debugPrint(e.message);
+        }
       } else {
         _data.add(QueryObject(isLoading: true, isFetching: true));
       }
@@ -80,6 +71,9 @@ class QueryProvider<T extends dynamic> {
 
         if (onSuccess != null) onSuccess!(parsedData);
       } on Exception catch (e) {
+        if (e is ConverterNotFountException) {
+          debugPrint(e.message);
+        }
         if (onError != null) onError!(e);
       }
     };
