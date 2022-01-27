@@ -13,7 +13,7 @@ import 'models/query_object.dart';
 import 'query_injectors.dart';
 
 class QueryProvider<T extends dynamic> {
-  final Converter converter = getItQuery.get<Converter>();
+  final ResponseConverter converter = getItQuery.get<ResponseConverter>();
 
   late String _queryKey;
   late final String _query;
@@ -55,6 +55,7 @@ class QueryProvider<T extends dynamic> {
               jsonDecode(sharedPreferences.get(_queryKey) as String));
           _data.add(
               QueryObject(isLoading: false, isFetching: true, data: cacheData));
+          if (onSuccess != null) onSuccess!(cacheData);
         } on ConverterNotFountException catch (e) {
           debugPrint(e.message);
         }
@@ -83,5 +84,9 @@ class QueryProvider<T extends dynamic> {
     if (fetchOnMount) {
       refetch();
     }
+  }
+
+  void clearCache() {
+    sharedPreferences.remove(_queryKey);
   }
 }

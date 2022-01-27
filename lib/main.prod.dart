@@ -13,7 +13,7 @@ void main() async {
 
   runApp(
     QueryClientProvider(
-      converter: jsonFactory,
+      converter: JsonFactory()(),
       child: EasyLocalization(
         path: 'assets/translations',
         startLocale: const Locale('ja', 'JP'),

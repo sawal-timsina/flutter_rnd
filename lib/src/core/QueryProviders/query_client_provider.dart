@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:watamuki/src/core/QueryProviders/Converters/converter.dart';
-import 'package:watamuki/src/core/QueryProviders/query_injectors.dart';
+import 'package:watamuki/src/core/QueryProviders/converters/converter.dart';
+
+import 'query_injectors.dart';
 
 class QueryClientProvider extends StatelessWidget {
-  final Converter converter;
+  final ResponseConverter converter;
   final Widget child;
 
   QueryClientProvider({Key? key, required this.converter, required this.child})

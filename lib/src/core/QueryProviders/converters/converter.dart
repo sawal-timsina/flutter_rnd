@@ -1,3 +1,3 @@
-abstract class Converter {
+abstract class ResponseConverter {
   dynamic convert<ResultType>(dynamic data);
 }

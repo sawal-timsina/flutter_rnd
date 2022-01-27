@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:watamuki/src/core/QueryProviders/converters/converter.dart';
 import 'package:watamuki/src/core/QueryProviders/models/params.dart';
 import 'package:watamuki/src/injector.dart';
 
-import 'converters/converter.dart';
 import 'converters/converter_not_found.dart';
 import 'models/query_context.dart';
 import 'models/query_object.dart';
 import 'query_injectors.dart';
 
 class InfiniteQueryProvider<T extends dynamic> {
-  final Converter converter = getItQuery.get<Converter>();
+  final ResponseConverter converter = getItQuery.get<ResponseConverter>();
 
   late String _queryKey;
   late final String _query;

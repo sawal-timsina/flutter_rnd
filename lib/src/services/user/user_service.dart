@@ -1,17 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/config/api/json_factory.dart';
-import 'package:watamuki/src/core/QueryProviders/models/params.dart';
-import 'package:watamuki/src/models/user/user.dart';
+import 'package:watamuki/src/core/QueryProviders/models/query_context.dart';
 
 abstract class IUserService {
-  Future<User> getAuthUser(Params? params);
+  Future<Response> getAuthUser({QueryContext? context});
 }
 
 class UserService extends IUserService {
   @override
-  Future<User> getAuthUser(Params? params) async {
-    final res = await dio.get("/users/auth",
+  Future<Response> getAuthUser({QueryContext? context}) {
+    final params = context?.pageParam[1];
+    return dio.get("/users/auth",
         queryParameters: params != null ? params.toJson() : {});
-    return jsonFactory.convert<User>(res.data["data"]);
   }
 }

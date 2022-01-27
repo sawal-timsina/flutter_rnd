@@ -112,7 +112,7 @@ class LoginPage extends StatelessWidget {
                           },
                           onError: (v) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("content")));
+                                SnackBar(content: Text(v.toString())));
                           },
                         );
                       }

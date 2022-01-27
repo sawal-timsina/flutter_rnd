@@ -1,16 +1,15 @@
-import 'package:watamuki/src/core/QueryProviders/converters/converter_not_found.dart';
-
 import 'converter.dart';
+import 'converter_not_found.dart';
 
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
 typedef ListFactory<T> = T Function(List<dynamic> list);
 
-class JsonConverter extends Converter {
+class JsonResponseConverter implements ResponseConverter {
   final Map<Type, JsonFactory> _jsonFactories;
   final Map<Type, ListFactory> _listFactories;
 
-  JsonConverter(this._jsonFactories, this._listFactories);
+  JsonResponseConverter(this._jsonFactories, this._listFactories);
 
   R _decodeMap<R>(Map<String, dynamic> values) {
     final jsonFactory = _jsonFactories[R];

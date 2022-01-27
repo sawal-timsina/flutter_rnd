@@ -80,7 +80,7 @@ class _CouponPageState extends State<CouponPage>
               itemKey: "name",
               tabs: snap.data?.data ?? [],
               onTap: (value) {
-                refetchCoupon(categories.first);
+                refetchCoupon(value);
               },
             );
           },
