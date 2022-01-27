@@ -50,6 +50,7 @@ class CouponCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CouponView(
+      dividerColor: AppColors.greyDark,
       axis: Axis.vertical,
       arcSize: const Size(24, 24),
       borderRadius: 16,
@@ -117,10 +118,10 @@ class CouponCard extends StatelessWidget {
                       title: tr("No of times") +
                           " : " +
                           (useTimes == 0
-                                  ? tr("Unlimited")
-                                  : (useTimes - useCount!) < 0
-                                      ? 0
-                                      : useTimes - useCount!)
+                              ? tr("Unlimited")
+                              : (useTimes - useCount!) < 0
+                              ? 0
+                              : useTimes - useCount!)
                               .toString(),
                       padding: const EdgeInsets.symmetric(horizontal: 0.1),
                       textStyle: const TextStyle(color: AppColors.greyDark),
@@ -159,20 +160,20 @@ class CouponCard extends StatelessWidget {
               type: isExpired | isUsed
                   ? ButtonType.filled
                   : isComing | buttonTitle.isNotEmpty
-                      ? ButtonType.outlined
-                      : ButtonType.filled,
+                  ? ButtonType.outlined
+                  : ButtonType.filled,
               label: tr(
                 isComing
                     ? "Coming soon"
                     : isExpired
-                        ? "Coupon expired"
-                        : isUsed
-                            ? "Coupon used"
-                            : buttonTitle.isNotEmpty
-                                ? buttonTitle
-                                : (isSpecial
-                                    ? "Use stamp rally coupon"
-                                    : "Use this coupon"),
+                    ? "Coupon expired"
+                    : isUsed
+                    ? "Coupon used"
+                    : buttonTitle.isNotEmpty
+                    ? buttonTitle
+                    : (isSpecial
+                    ? "Use stamp rally coupon"
+                    : "Use this coupon"),
               ),
               onPressed: onButtonPress!,
             ),
