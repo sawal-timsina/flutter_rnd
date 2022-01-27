@@ -14,8 +14,9 @@ import 'package:watamuki/src/widgets/molecules/title_bar.dart';
 
 class CouponPage extends StatefulWidget {
   static const routeName = 'coupons';
+  final ScrollController _controller = ScrollController();
 
-  const CouponPage({Key? key}) : super(key: key);
+  CouponPage({Key? key}) : super(key: key);
 
   @override
   State<CouponPage> createState() => _CouponPageState();
@@ -81,23 +82,28 @@ class _CouponPageState extends State<CouponPage>
               tabs: snap.data?.data ?? [],
               onTap: (value) {
                 refetchCoupon(value);
+                widget._controller.animateTo(
+                  widget._controller.position.minScrollExtent,
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.easeIn,
+                );
               },
             );
           },
         ),
-        StreamBuilder<QueryObject<List<Coupon>>>(
-          stream: _couponQuery.dataStream,
-          builder: (_, snap) {
-            final coupons = snap.data?.data ?? [];
-
-            return Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  await _categoryQuery.refetch();
-                  await _categoryQuery.refetch();
-                  return Future.value();
-                },
-                child: ListView.builder(
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await _categoryQuery.refetch();
+              await _categoryQuery.refetch();
+              return Future.value();
+            },
+            child: StreamBuilder<QueryObject<List<Coupon>>>(
+              stream: _couponQuery.dataStream,
+              builder: (_, snap) {
+                final coupons = snap.data?.data ?? [];
+                return ListView.builder(
+                  controller: widget._controller,
                   itemCount: coupons.length,
                   itemBuilder: (_, int index) {
                     return CouponCard(
@@ -112,10 +118,10 @@ class _CouponPageState extends State<CouponPage>
                       },
                     );
                   },
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
       ],
     );

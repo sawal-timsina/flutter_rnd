@@ -15,7 +15,7 @@ import 'query_injectors.dart';
 class QueryProvider<T extends dynamic> {
   final ResponseConverter converter = getItQuery.get<ResponseConverter>();
 
-  late String _queryKey;
+  String _queryKey = "";
   late final String _query;
   late Params? params;
   late QueryContext _queryContext;
@@ -87,6 +87,8 @@ class QueryProvider<T extends dynamic> {
   }
 
   void clearCache() {
-    sharedPreferences.remove(_queryKey);
+    if (_queryKey.isNotEmpty) {
+      sharedPreferences.remove(_queryKey);
+    }
   }
 }

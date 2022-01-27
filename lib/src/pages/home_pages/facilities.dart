@@ -14,8 +14,9 @@ import 'package:watamuki/src/widgets/molecules/title_bar.dart';
 
 class FacilitiesPage extends StatefulWidget {
   static const routeName = 'facilities';
+  final ScrollController _controller = ScrollController();
 
-  const FacilitiesPage({Key? key}) : super(key: key);
+  FacilitiesPage({Key? key}) : super(key: key);
 
   @override
   State<FacilitiesPage> createState() => _FacilitiesPageState();
@@ -85,18 +86,19 @@ class _FacilitiesPageState extends State<FacilitiesPage>
             );
           },
         ),
-        StreamBuilder<QueryObject<List<Facility>>>(
-          stream: _facilityQuery.dataStream,
-          builder: (_, snap) {
-            final facilities = snap.data?.data ?? [];
-            return Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  await _categoryQuery.refetch();
-                  await _facilityQuery.refetch();
-                  return Future.value();
-                },
-                child: ListView.builder(
+        Expanded(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await _categoryQuery.refetch();
+              await _facilityQuery.refetch();
+              return Future.value();
+            },
+            child: StreamBuilder<QueryObject<List<Facility>>>(
+              stream: _facilityQuery.dataStream,
+              builder: (_, snap) {
+                final facilities = snap.data?.data ?? [];
+                return ListView.builder(
+                  controller: widget._controller,
                   itemCount: facilities.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListItem(
@@ -112,11 +114,11 @@ class _FacilitiesPageState extends State<FacilitiesPage>
                       },
                     );
                   },
-                ),
-              ),
-            );
-          },
-        )
+                );
+              },
+            ),
+          ),
+        ),
       ],
     );
   }
