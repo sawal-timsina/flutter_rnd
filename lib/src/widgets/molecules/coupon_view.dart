@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
 
 class CouponView extends StatefulWidget {
   final Axis axis;
@@ -106,8 +105,9 @@ class _CouponViewState extends State<CouponView> {
                         (MediaQuery.of(context).size.width /
                                 MediaQuery.of(context).devicePixelRatio)
                             .toInt(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: AppColors.greyDark),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: widget.dividerColor),
                   ),
                 ),
               ),
