@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:watamuki/src/config/api/json_factory.dart';
 import 'package:watamuki/src/core/params/index.dart';
-import 'package:watamuki/src/core/resources/data_state.dart';
 import 'package:watamuki/src/injector.dart';
 
 class QueryObject<T> {
@@ -41,7 +39,7 @@ class QueryProvider<T extends dynamic> {
   dynamic Function(Map<String, dynamic>)? select;
 
   void Function(T data)? onSuccess;
-  void Function(ErrorResponse error)? onError;
+  void Function(Exception error)? onError;
   bool fetchOnMount;
 
   late final Future Function() refetch;
@@ -79,10 +77,8 @@ class QueryProvider<T extends dynamic> {
         sharedPreferences.setString(_queryKey, jsonEncode(parsedData));
 
         if (onSuccess != null) onSuccess!(parsedData);
-      } catch (e, s) {
-        debugPrint(e.toString());
-        debugPrint(s.toString());
-        if (onError != null) onError!(const ErrorResponse("Shit happened"));
+      } on Exception catch (e) {
+        if (onError != null) onError!(e);
       }
     };
 
