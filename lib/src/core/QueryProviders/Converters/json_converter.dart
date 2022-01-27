@@ -1,10 +1,8 @@
+import 'converter.dart';
+
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
 typedef ListFactory<T> = T Function(List<dynamic> list);
-
-abstract class Converter {
-  dynamic convert<ResultType>(dynamic data);
-}
 
 class JsonConverter extends Converter {
   final Map<Type, JsonFactory> _jsonFactories;
