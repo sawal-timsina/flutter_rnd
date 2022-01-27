@@ -1,32 +1,39 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 import 'package:watamuki/src/config/firebase/auth.dart';
+import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 import 'package:watamuki/src/models/user/user.dart';
 import 'package:watamuki/src/services/index.dart';
 
 class AuthProvider with ChangeNotifier {
   User? _dbUser;
+  final _userQuery =
+      QueryProvider<User>("auth_user", userService.getAuthUser, select: (data) {
+    return data["data"];
+  }, fetchOnMount: false);
 
   AuthProvider() : super() {
     _dbUser = null;
+    _userQuery.onSuccess = setAuthUser;
     firebaseAuth.authStateChanges().listen((auth.User? user) {
       if (user != null) {
         _user = user;
         _loggedIn = true;
-        getAuthUser();
+        _userQuery.refetch();
       } else {
         _phoneVerified = false;
         _phoneNumber = "";
         _loggedIn = false;
         _user = null;
         _dbUser = null;
+        _userQuery.clearCache();
       }
       notifyListeners();
     });
   }
 
-  void getAuthUser() async {
-    _dbUser = await userService.getAuthUser(null);
+  void setAuthUser(User user) async {
+    _dbUser = user;
     notifyListeners();
   }
 
