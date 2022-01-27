@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:watamuki/src/core/QueryProviders/models/params.dart';
 import 'package:watamuki/src/injector.dart';
 
 import 'converters/converter.dart';
 import 'converters/converter_not_found.dart';
-import 'models/params.dart';
 import 'models/query_context.dart';
 import 'models/query_object.dart';
 import 'query_injectors.dart';
 
-class QueryProvider<T extends dynamic> {
+class InfiniteQueryProvider<T extends dynamic> {
   final Converter converter = getItQuery.get<Converter>();
 
   late String _queryKey;
@@ -36,14 +36,15 @@ class QueryProvider<T extends dynamic> {
 
   late final Future Function() refetch;
 
-  QueryProvider(this._query,
-      this._queryFn, {
-        this.params,
-        this.fetchOnMount = true,
-        this.onSuccess,
-        this.onError,
-        this.select,
-      }) {
+  InfiniteQueryProvider(
+    this._query,
+    this._queryFn, {
+    this.params,
+    this.fetchOnMount = true,
+    this.onSuccess,
+    this.onError,
+    this.select,
+  }) {
     refetch = () async {
       _queryKey = [_query, params?.toJson()].toString();
       _queryContext = QueryContext(pageParam: [_query, params]);
@@ -73,9 +74,6 @@ class QueryProvider<T extends dynamic> {
 
         if (onSuccess != null) onSuccess!(parsedData);
       } on Exception catch (e) {
-        if (e is ConverterNotFountException) {
-          debugPrint(e.message);
-        }
         if (onError != null) onError!(e);
       }
     };

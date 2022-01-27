@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/core/QueryProviders/models/query_object.dart';
 import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 import 'package:watamuki/src/core/params/category.dart';
 import 'package:watamuki/src/core/params/facility.dart';
@@ -21,6 +23,17 @@ class FacilitiesPage extends StatefulWidget {
 
 class _FacilitiesPageState extends State<FacilitiesPage>
     with AutomaticKeepAliveClientMixin<FacilitiesPage> {
+  void onError(Exception e) {
+    if (e is DioError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
+
   final _categoryQuery = QueryProvider<List<Category>>(
     "facility_category",
     categoryService.getAllCategory,
@@ -33,16 +46,23 @@ class _FacilitiesPageState extends State<FacilitiesPage>
   final _facilityQuery = QueryProvider<List<Facility>>(
     "all_facilities",
     facilityService.getAllFacilities,
-    fetchOnMount: false,
     select: (data) {
       return data["data"];
     },
+    fetchOnMount: false,
   );
+
+  void refetchFacility(Category category) {
+    _facilityQuery.params = FacilityParams(categoryId: category.id);
+    _facilityQuery.refetch();
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     String title = FacilitiesPage.routeName;
+
+    _categoryQuery.onError ??= (e) => onError(e);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,16 +74,13 @@ class _FacilitiesPageState extends State<FacilitiesPage>
           builder: (_, snap) {
             final categories = snap.data?.data ?? [];
             if (_facilityQuery.params == null && categories.isNotEmpty) {
-              _facilityQuery.params =
-                  FacilityParams(categoryId: categories.first.id);
-              _facilityQuery.refetch();
+              refetchFacility(categories.first);
             }
             return CategoryTabBar<Category>(
               itemKey: "name",
               tabs: categories,
               onTap: (value) {
-                _facilityQuery.params = FacilityParams(categoryId: value.id);
-                _facilityQuery.refetch();
+                refetchFacility(value);
               },
             );
           },

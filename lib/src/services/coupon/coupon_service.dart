@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/core/QueryProviders/models/modals.dart';
+import 'package:watamuki/src/core/QueryProviders/models/query_context.dart';
 
 abstract class ICouponService {
   Future<Response> getAllCoupons({QueryContext? context});

@@ -1,6 +1,6 @@
 import 'package:watamuki/src/config/api/api.dart';
 import 'package:watamuki/src/config/api/json_factory.dart';
-import 'package:watamuki/src/core/params/index.dart';
+import 'package:watamuki/src/core/QueryProviders/models/params.dart';
 import 'package:watamuki/src/models/user/user.dart';
 
 abstract class IUserService {
