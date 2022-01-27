@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/core/params/category.dart';
@@ -21,6 +22,17 @@ class _CouponPageState extends State<CouponPage>
     with AutomaticKeepAliveClientMixin<CouponPage> {
   Category selectedCategory = Category(id: 0, name: "");
 
+  void onError(Exception e) {
+    if (e is DioError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
+
   final categoryQuery = QueryProvider<List<Category>>(
     "coupon_category",
     categoryService.getAllCategory,
@@ -33,6 +45,7 @@ class _CouponPageState extends State<CouponPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    categoryQuery.onError ??= (e) => onError(e);
 
     String title = CouponPage.routeName;
     return Column(
@@ -65,9 +78,9 @@ class _CouponPageState extends State<CouponPage>
               itemBuilder: (BuildContext context, int index) {
                 return CouponCard(
                   imageUrl:
-                      "https://storage.googleapis.com/watamuki-development/images/original/1640347742921780511.jpg",
+                  "https://storage.googleapis.com/watamuki-development/images/original/1640347742921780511.jpg",
                   title:
-                      "data lkslajdl ajsld alsdkja ldjald kjalksdjlasdjlakjd lasdkjl alsdjals",
+                  "data lkslajdl ajsld alsdkja ldjald kjalksdjlasdjlakjd lasdkjl alsdjals",
                   benefits: "30 % off",
                   useTimes: 3,
                   startDate: '2021-12-15',
