@@ -1,3 +1,5 @@
+import 'package:watamuki/src/core/QueryProviders/converters/converter_not_found.dart';
+
 import 'converter.dart';
 
 typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
@@ -10,18 +12,18 @@ class JsonConverter extends Converter {
 
   JsonConverter(this._jsonFactories, this._listFactories);
 
-  R? _decodeMap<R>(Map<String, dynamic> values) {
+  R _decodeMap<R>(Map<String, dynamic> values) {
     final jsonFactory = _jsonFactories[R];
     if (jsonFactory == null) {
-      return null;
+      throw ConverterNotFountException<R>();
     }
     return jsonFactory(values);
   }
 
-  R? _decodeList<R>(List values) {
+  R _decodeList<R>(List values) {
     final jsonFactory = _listFactories[R];
     if (jsonFactory == null) {
-      return null;
+      throw ConverterNotFountException<R>();
     }
     return jsonFactory(values);
   }
