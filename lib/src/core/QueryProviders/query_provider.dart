@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:watamuki/src/config/api/json_factory.dart';
+import 'package:watamuki/src/core/QueryProviders/Converters/converter.dart';
+import 'package:watamuki/src/core/QueryProviders/query_injectors.dart';
 import 'package:watamuki/src/core/params/index.dart';
 import 'package:watamuki/src/injector.dart';
 
@@ -23,6 +24,8 @@ class QueryContext {
 }
 
 class QueryProvider<T extends dynamic> {
+  final Converter converter = getItQuery.get<Converter>();
+
   late String _queryKey;
   late final String _query;
   late Params? params;
@@ -44,22 +47,21 @@ class QueryProvider<T extends dynamic> {
 
   late final Future Function() refetch;
 
-  QueryProvider(
-    this._query,
-    this._queryFn, {
-    this.params,
-    this.fetchOnMount = true,
-    this.onSuccess,
-    this.onError,
-    this.select,
-  }) {
+  QueryProvider(this._query,
+      this._queryFn, {
+        this.params,
+        this.fetchOnMount = true,
+        this.onSuccess,
+        this.onError,
+        this.select,
+      }) {
     refetch = () async {
       _queryKey = [_query, params?.toJson()].toString();
       _queryContext = QueryContext(queries: [_query, params]);
 
       final hasData = sharedPreferences.containsKey(_queryKey);
       if (hasData) {
-        T cacheData = jsonFactory
+        T cacheData = converter
             .convert<T>(jsonDecode(sharedPreferences.get(_queryKey) as String));
         _data.add(
             QueryObject(isLoading: false, isFetching: true, data: cacheData));
@@ -70,7 +72,7 @@ class QueryProvider<T extends dynamic> {
       try {
         final res = await _queryFn(context: _queryContext);
         final data = select!(res.data) ?? res.data;
-        final parsedData = jsonFactory.convert<T>(data);
+        final parsedData = converter.convert<T>(data);
 
         _data.add(
             QueryObject(isLoading: false, isFetching: false, data: parsedData));
