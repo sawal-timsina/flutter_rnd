@@ -16,7 +16,7 @@ class Coupon extends Indexable {
   bool isPublic;
   String title;
   @JsonKey(name: "start_date")
-  String startDate;
+  String? startDate;
   @JsonKey(name: "end_date")
   String endDate;
   String image;
@@ -25,9 +25,9 @@ class Coupon extends Indexable {
   String description;
   String benefits;
   String notes;
-  String area;
+  String? area;
   @JsonKey(name: "special_feature")
-  String specialFeature;
+  String? specialFeature;
   @JsonKey(name: "is_special")
   bool? isSpecial;
   @JsonKey(name: "useCount")
@@ -51,7 +51,7 @@ class Coupon extends Indexable {
     required this.specialFeature,
     this.isSpecial,
     this.useCount,
-  });
+  }) : super(id);
 
   factory Coupon.fromJson(Map<String, dynamic> json) => _$CouponFromJson(json);
 
