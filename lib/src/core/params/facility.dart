@@ -8,10 +8,13 @@ class FacilityParams implements Params {
   String? area;
   @JsonKey(name: "category_id")
   int? categoryId;
+  @JsonKey(name: "cursor")
+  String? cursor;
 
   FacilityParams({
     this.categoryId,
     this.area,
+    this.cursor,
   });
 
   @override

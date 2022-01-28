@@ -10,4 +10,5 @@ Map<String, dynamic> _$FacilityParamsToJson(FacilityParams instance) =>
     <String, dynamic>{
       'area': instance.area,
       'category_id': instance.categoryId,
+      'cursor': instance.cursor,
     };
