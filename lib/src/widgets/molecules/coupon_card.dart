@@ -11,8 +11,8 @@ class CouponCard extends StatelessWidget {
   final String benefits;
   final int useTimes;
   final int? useCount;
-  String startDate;
-  String endDate;
+  late final String _startDate;
+  late final String _endDate;
   final String imageUrl;
   final String buttonTitle;
   final bool isSpecial;
@@ -30,8 +30,8 @@ class CouponCard extends StatelessWidget {
     required this.imageUrl,
     required this.benefits,
     required this.useTimes,
-    required this.startDate,
-    required this.endDate,
+    required String startDate,
+    required String endDate,
     this.isSpecial = false,
     this.useCount = 0,
     this.buttonTitle = "",
@@ -39,12 +39,17 @@ class CouponCard extends StatelessWidget {
   }) : super(key: key) {
     isUsed = useTimes != 0 && useTimes - useCount! <= 0;
 
-    startDate = formatter.format(DateTime.tryParse(startDate)!);
-    isComing = DateTime.tryParse(startDate)
-            ?.isAfter(DateTime.tryParse(formatter.format(DateTime.now()))!) ??
-        false;
+    if (startDate.isNotEmpty) {
+      _startDate = formatter.format(DateTime.tryParse(startDate)!);
+      isComing = DateTime.tryParse(startDate)
+              ?.isAfter(DateTime.tryParse(formatter.format(DateTime.now()))!) ??
+          false;
+    } else {
+      _startDate = "";
+      isComing = false;
+    }
 
-    endDate = formatter.format(DateTime.tryParse(endDate)!);
+    _endDate = formatter.format(DateTime.tryParse(endDate)!);
     isExpired = DateTime.tryParse(endDate)
             ?.isBefore(DateTime.tryParse(formatter.format(DateTime.now()))!) ??
         false;
@@ -137,7 +142,7 @@ class CouponCard extends StatelessWidget {
                     Tag(
                       type: TagType.transparent,
                       icon: isSpecial ? null : Icons.today_outlined,
-                      title: isSpecial ? "" : tr("Start") + " : $startDate",
+                      title: isSpecial ? "" : tr("Start") + " : $_startDate",
                       padding: const EdgeInsets.symmetric(horizontal: 0.1),
                       textStyle: const TextStyle(color: AppColors.greyDark),
                     ),
@@ -147,7 +152,7 @@ class CouponCard extends StatelessWidget {
                     Tag(
                       type: TagType.transparent,
                       icon: Icons.today_outlined,
-                      title: tr("Expiry") + " : $endDate",
+                      title: tr("Expiry") + " : $_endDate",
                       padding: const EdgeInsets.symmetric(horizontal: 0.1),
                       textStyle: const TextStyle(color: AppColors.greyDark),
                     ),
