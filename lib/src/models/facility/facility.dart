@@ -22,7 +22,7 @@ class Facility extends Indexable {
     required this.overview,
     required this.updatedAt,
     required this.createdAt,
-  });
+  }) : super(id);
 
   factory Facility.fromJson(Map<String, dynamic> json) =>
       _$FacilityFromJson(json);

@@ -39,7 +39,7 @@ class User extends Indexable {
     required this.isPhoneVerified,
     required this.updatedAt,
     required this.createdAt,
-  });
+  }) : super(id);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

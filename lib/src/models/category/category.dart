@@ -12,7 +12,7 @@ class Category extends Indexable {
   Category({
     required this.id,
     required this.name,
-  });
+  }) : super(id);
 
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
