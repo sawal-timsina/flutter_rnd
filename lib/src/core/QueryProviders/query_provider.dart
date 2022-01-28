@@ -46,7 +46,7 @@ class QueryProvider<T extends dynamic> {
       }) {
     refetch = () async {
       _queryKey = [_query, params?.toJson()].toString();
-      _queryContext = QueryContext(pageParam: [_query, params]);
+      _queryContext = QueryContext(queryKey: [_query, params]);
 
       final hasData = sharedPreferences.containsKey(_queryKey);
       if (hasData) {
@@ -89,6 +89,13 @@ class QueryProvider<T extends dynamic> {
   void clearCache() {
     if (_queryKey.isNotEmpty) {
       sharedPreferences.remove(_queryKey);
+    }
+  }
+
+  void revalidateCache() {
+    if (_queryKey.isNotEmpty) {
+      sharedPreferences.remove(_queryKey);
+      refetch();
     }
   }
 }
