@@ -10,6 +10,7 @@ late SharedPreferences sharedPreferences;
 
 Future<void> initializeDependencies(String env) async {
   await EasyLocalization.ensureInitialized();
+  EasyLocalization.logger.enableBuildModes = [];
 
   await dotenv.load(fileName: ".$env.env");
 
