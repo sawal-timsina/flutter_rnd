@@ -1,7 +1,9 @@
 class QueryContext {
-  List<dynamic> pageParam;
+  dynamic pageParam;
+  List<dynamic> queryKey;
 
   QueryContext({
-    required this.pageParam,
+    this.pageParam,
+    required this.queryKey,
   });
 }
