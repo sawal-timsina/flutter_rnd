@@ -9,7 +9,7 @@ abstract class IUserService {
 class UserService extends IUserService {
   @override
   Future<Response> getAuthUser({QueryContext? context}) {
-    final params = context?.pageParam[1];
+    final params = context?.queryKey[1];
     return dio.get("/users/auth",
         queryParameters: params != null ? params.toJson() : {});
   }

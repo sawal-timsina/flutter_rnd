@@ -9,7 +9,7 @@ abstract class ICategoryService {
 class CategoryService extends ICategoryService {
   @override
   Future<Response> getAllCategory({QueryContext? context}) {
-    final params = context?.pageParam[1];
+    final params = context?.queryKey[1];
     return dio.get("/categories/public",
         queryParameters: params != null ? params.toJson() : {});
   }
