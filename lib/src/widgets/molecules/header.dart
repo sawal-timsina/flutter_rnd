@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:watamuki/src/providers/auth_provider.dart';
 import 'package:watamuki/src/widgets/atoms/button.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
@@ -10,14 +12,18 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: <Widget>[
-        Button(
-          type: ButtonType.transparent,
-          icon: const Icon(Icons.directions_bus, size: 24),
-          label: "Bus pass",
-          textStyle: Theme.of(context).textTheme.subtitle1,
-          disableBorder: true,
-          onPressed: () {
-            /*showModalBottomSheet<dynamic>(
+        Consumer<AuthProvider>(builder: (_, value, __) {
+          if (!value.loggedIn) {
+            return const SizedBox.shrink();
+          }
+          return Button(
+            type: ButtonType.transparent,
+            icon: const Icon(Icons.directions_bus, size: 24),
+            label: "Bus pass",
+            textStyle: Theme.of(context).textTheme.subtitle1,
+            disableBorder: true,
+            onPressed: () {
+              /*showModalBottomSheet<dynamic>(
               context: context,
               barrierColor: AppColors.greyDark.withAlpha(153),
               backgroundColor: Colors.white,
@@ -113,8 +119,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                 );
               },
             );*/
-          },
-        ),
+            },
+          );
+        }),
         Button(
           type: ButtonType.transparent,
           label: "Route",
