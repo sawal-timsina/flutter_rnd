@@ -1,15 +1,22 @@
 import 'package:flutter/cupertino.dart';
-import 'package:watamuki/src/core/QueryProviders/converters/converter.dart';
+import 'package:get_it/get_it.dart';
 
-import 'query_injectors.dart';
+import 'converters/converter.dart';
+import 'utils/cache_manager.dart';
+
+final getItQuery = GetIt.instance;
 
 class QueryClientProvider extends StatelessWidget {
-  final ResponseConverter converter;
   final Widget child;
 
-  QueryClientProvider({Key? key, required this.converter, required this.child})
+  QueryClientProvider(
+      {Key? key,
+      required this.child,
+      required ResponseConverter converter,
+      required CacheManager cacheManager})
       : super(key: key) {
-    initDependency(converter: converter);
+    getItQuery.registerSingleton<ResponseConverter>(converter);
+    getItQuery.registerSingleton<CacheManager>(cacheManager);
   }
 
   @override
