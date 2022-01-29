@@ -11,7 +11,8 @@ class FacilityService extends IFacilityService {
   @override
   Future<Response> getAllFacilities({QueryContext? context}) {
     final params = context?.queryKey[1] as FacilityParams;
-    params.cursor = context?.pageParam ?? DateTime.now();
+    params.cursor =
+        context?.pageParam ?? DateTime.now().toUtc().toIso8601String();
     return dio.get("/facilities/public", queryParameters: params.toJson());
   }
 }

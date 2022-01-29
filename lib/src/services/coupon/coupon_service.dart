@@ -11,7 +11,8 @@ class CouponService extends ICouponService {
   @override
   Future<Response> getAllCoupons({QueryContext? context}) {
     final params = context?.queryKey[1] as CouponParams;
-    params.cursor = context?.pageParam ?? DateTime.now().toIso8601String();
+    params.cursor =
+        context?.pageParam ?? DateTime.now().toUtc().toIso8601String();
     return dio.get(
         (params.categoryId! <= 0 ? "/stamp-rally-coupon" : "/coupons") +
             "/public",
