@@ -1,11 +1,11 @@
-import 'package:watamuki/src/core/QueryProviders/models/params.dart';
-
-abstract class Indexable extends Params {
+abstract class Indexable {
   late final int key;
 
   Indexable(this.key);
 
   operator [](index) => toJson()[index];
+
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
