@@ -1,4 +1,4 @@
-abstract class BaseProvider<T extends dynamic> {
+abstract class BaseProvider {
   BaseProvider();
 
   Future refetch();
