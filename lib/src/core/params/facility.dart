@@ -19,4 +19,9 @@ class FacilityParams implements Params {
 
   @override
   Map<String, dynamic> toJson() => _$FacilityParamsToJson(this);
+
+  @override
+  FacilityParams clone() {
+    return FacilityParams(area: area, cursor: cursor, categoryId: categoryId);
+  }
 }

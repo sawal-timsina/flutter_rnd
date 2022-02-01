@@ -8,7 +8,6 @@ class CouponParams implements Params {
   String? area;
   @JsonKey(name: "category_id")
   int? categoryId;
-  @JsonKey(name: "cursor")
   String? cursor;
 
   CouponParams({
@@ -19,4 +18,9 @@ class CouponParams implements Params {
 
   @override
   Map<String, dynamic> toJson() => _$CouponParamsToJson(this);
+
+  @override
+  CouponParams clone() {
+    return CouponParams(area: area, categoryId: categoryId, cursor: cursor);
+  }
 }

@@ -28,4 +28,9 @@ class CategoryParams implements Params {
 
   @override
   Map<String, dynamic> toJson() => _$CategoryParamsToJson(this);
+
+  @override
+  CategoryParams clone() {
+    return CategoryParams(type: type);
+  }
 }
