@@ -11,48 +11,58 @@ class CouponCard extends StatelessWidget {
   final String benefits;
   final int useTimes;
   final int? useCount;
-  late final String _startDate;
-  late final String _endDate;
+  final String? startDate;
+  final String endDate;
   final String imageUrl;
-  final String buttonTitle;
-  final bool isSpecial;
+  final String? buttonTitle;
+  final bool? isSpecial;
 
-  late final bool isComing;
-  late final bool isExpired;
-  late final bool isUsed;
   final GestureTapCallback? onButtonPress;
-  final DateFormat formatter = DateFormat('yyyy-MM-dd');
 
-  CouponCard({
+  const CouponCard({
     Key? key,
     required this.title,
     this.subTitle,
     required this.imageUrl,
     required this.benefits,
     required this.useTimes,
-    required String startDate,
-    required String endDate,
-    this.isSpecial = false,
-    this.useCount = 0,
-    this.buttonTitle = "",
+    required this.startDate,
+    required this.endDate,
+    this.isSpecial,
+    this.useCount,
+    this.buttonTitle,
     this.onButtonPress,
-  }) : super(key: key) {
-    isUsed = useTimes != 0 && useTimes - useCount! <= 0;
+  }) : super(key: key);
 
-    if (startDate.isNotEmpty) {
-      _startDate = formatter.format(DateTime.tryParse(startDate)!);
-      isComing = DateTime.tryParse(startDate)
+  bool isComing() {
+    if (startDate != null) {
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      return DateTime.tryParse(startDate!)
               ?.isAfter(DateTime.tryParse(formatter.format(DateTime.now()))!) ??
           false;
-    } else {
-      _startDate = "";
-      isComing = false;
     }
+    return false;
+  }
 
-    _endDate = formatter.format(DateTime.tryParse(endDate)!);
-    isExpired = DateTime.tryParse(endDate)
+  bool isExpired() {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return DateTime.tryParse(endDate)
             ?.isBefore(DateTime.tryParse(formatter.format(DateTime.now()))!) ??
         false;
+  }
+
+  String getEndDate() {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(DateTime.tryParse(endDate)!);
+  }
+
+  String getStartDate() {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(DateTime.tryParse(startDate!)!);
+  }
+
+  bool isUsed() {
+    return useTimes != 0 && useTimes - (useCount ?? 0) <= 0;
   }
 
   @override
@@ -127,9 +137,9 @@ class CouponCard extends StatelessWidget {
                           " : " +
                           (useTimes == 0
                                   ? tr("Unlimited")
-                                  : (useTimes - useCount!) < 0
+                                  : (useTimes - (useCount ?? 0)) < 0
                                       ? 0
-                                      : useTimes - useCount!)
+                                      : useTimes - (useCount ?? 0))
                               .toString(),
                       padding: const EdgeInsets.symmetric(horizontal: 0.1),
                       textStyle: const TextStyle(color: AppColors.greyDark),
@@ -141,8 +151,10 @@ class CouponCard extends StatelessWidget {
                   children: [
                     Tag(
                       type: TagType.transparent,
-                      icon: isSpecial ? null : Icons.today_outlined,
-                      title: isSpecial ? "" : tr("Start") + " : $_startDate",
+                      icon: isSpecial! ? null : Icons.today_outlined,
+                      title: isSpecial!
+                          ? ""
+                          : tr("Start") + " : " + getStartDate(),
                       padding: const EdgeInsets.symmetric(horizontal: 0.1),
                       textStyle: const TextStyle(color: AppColors.greyDark),
                     ),
@@ -152,7 +164,7 @@ class CouponCard extends StatelessWidget {
                     Tag(
                       type: TagType.transparent,
                       icon: Icons.today_outlined,
-                      title: tr("Expiry") + " : $_endDate",
+                      title: tr("Expiry") + " : " + getEndDate(),
                       padding: const EdgeInsets.symmetric(horizontal: 0.1),
                       textStyle: const TextStyle(color: AppColors.greyDark),
                     ),
@@ -164,22 +176,22 @@ class CouponCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             child: Button(
-              disabled: isComing | isExpired | isUsed,
-              type: isExpired | isUsed
+              disabled: isComing() | isExpired() | isUsed(),
+              type: isExpired() | isUsed()
                   ? ButtonType.filled
-                  : isComing | buttonTitle.isNotEmpty
+                  : isComing() | (buttonTitle ?? "").isNotEmpty
                       ? ButtonType.outlined
                       : ButtonType.filled,
               label: tr(
-                isComing
+                isComing()
                     ? "Coming soon"
-                    : isExpired
+                    : isExpired()
                         ? "Coupon expired"
-                        : isUsed
+                        : isUsed()
                             ? "Coupon used"
-                            : buttonTitle.isNotEmpty
-                                ? buttonTitle
-                                : (isSpecial
+                            : (buttonTitle ?? "").isNotEmpty
+                                ? (buttonTitle ?? "")
+                                : (isSpecial!
                                     ? "Use stamp rally coupon"
                                     : "Use this coupon"),
               ),
