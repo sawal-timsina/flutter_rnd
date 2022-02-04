@@ -1,4 +1,4 @@
-class QueryObject<T> {
+class QueryObject<T extends dynamic> {
   T? data;
   bool isLoading;
   bool isFetching;

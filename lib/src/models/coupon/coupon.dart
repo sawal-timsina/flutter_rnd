@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:watamuki/src/models/index.dart';
 
-part 'index.g.dart';
+part 'coupon.g.dart';
 
 @JsonSerializable()
 class Coupon extends Indexable {
