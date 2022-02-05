@@ -1,4 +1,4 @@
-package jp.readytowork.watamuki
+package jp.watamuki
 
 import io.flutter.embedding.android.FlutterActivity
 
