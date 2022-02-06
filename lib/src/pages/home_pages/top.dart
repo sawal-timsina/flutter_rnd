@@ -6,7 +6,7 @@ import 'package:watamuki/src/widgets/atoms/button.dart';
 import 'home_navigator.dart';
 
 class TopPage extends StatefulWidget {
-  static const routeName = 'top';
+  static const routeName = 'Top';
 
   const TopPage({Key? key}) : super(key: key);
 

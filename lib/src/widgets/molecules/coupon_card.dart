@@ -177,6 +177,7 @@ class CouponCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             child: Button(
               disabled: isComing() | isExpired() | isUsed(),
+              size: ButtonSize.medium,
               type: isExpired() | isUsed()
                   ? ButtonType.filled
                   : isComing() | (buttonTitle ?? "").isNotEmpty

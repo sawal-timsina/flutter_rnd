@@ -106,7 +106,7 @@ class AppRouter {
       {bool hasHPadding = false}) {
     return PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
-          const padding = EdgeInsets.symmetric(vertical: 12);
+          const padding = EdgeInsets.symmetric(vertical: 8);
           return Container(
             color: Colors.white,
             padding:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:watamuki/src/widgets/atoms/button.dart';
 
 class FacilityDetailPage extends StatelessWidget {
-  static const routeName = 'facility_detail';
+  static const routeName = 'Facility_detail';
 
   const FacilityDetailPage({Key? key}) : super(key: key);
 

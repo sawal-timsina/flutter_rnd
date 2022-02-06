@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watamuki/src/config/themes/colors.dart';
+import 'package:watamuki/src/core/utils/constants.dart';
 
 enum ButtonType {
   filled,
@@ -54,8 +55,8 @@ class Button extends StatelessWidget {
       highlightElevation: 0,
       constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
       padding: EdgeInsets.symmetric(
-          vertical: sizeValue[size] ?? 0, horizontal: sizeValue[size] ?? 0),
-      // .merge(padding),
+              vertical: sizeValue[size] ?? 0, horizontal: sizeValue[size] ?? 0)
+          .merge(padding),
       textStyle: (size == ButtonSize.large
               ? Theme.of(context).textTheme.button
               : size == ButtonSize.medium

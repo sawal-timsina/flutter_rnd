@@ -6,7 +6,7 @@ import 'home_navigator.dart';
 import 'town_info_details.dart';
 
 class SpecialFeaturePage extends StatelessWidget {
-  static const routeName = 'special_feature';
+  static const routeName = 'Special_feature';
 
   const SpecialFeaturePage({Key? key}) : super(key: key);
 

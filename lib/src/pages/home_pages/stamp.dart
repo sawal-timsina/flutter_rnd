@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/pages/home_pages/facility_detail.dart';
 import 'package:watamuki/src/widgets/atoms/button.dart';
 
 import 'home_navigator.dart';
 
 class StampPage extends StatefulWidget {
-  static const routeName = 'stamp';
+  static const routeName = 'Stamp';
 
   const StampPage({Key? key}) : super(key: key);
 
@@ -27,7 +28,8 @@ class _StampPageState extends State<StampPage>
           const SizedBox(height: 8),
           Button(
             onPressed: () {
-              homeNavigator.currentState?.pushNamed("facility_detail");
+              homeNavigator.currentState
+                  ?.pushNamed(FacilityDetailPage.routeName);
             },
             label: title,
           ),

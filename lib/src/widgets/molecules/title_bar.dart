@@ -30,7 +30,7 @@ class TitleBar extends StatelessWidget {
           ),
           Button(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            size: ButtonSize.medium,
+            size: ButtonSize.small,
             onPressed: () {},
             label: tr("Search from area"),
           ),

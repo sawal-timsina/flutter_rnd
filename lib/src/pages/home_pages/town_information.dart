@@ -5,7 +5,7 @@ import 'package:watamuki/src/widgets/atoms/button.dart';
 import 'home_navigator.dart';
 
 class TownInformationPage extends StatelessWidget {
-  static const routeName = 'town_information';
+  static const routeName = 'Town_information';
 
   const TownInformationPage({Key? key}) : super(key: key);
 
