@@ -18,16 +18,11 @@ extension Merge on EdgeInsets {
 bool _isList(list) => list is List;
 
 bool _checkArray(List list) {
-  if (list.isEmpty) return true;
-
-  var flag = _isList(list[0]);
-  var length = flag ? list[0].length : 0;
+  bool isAllList = false;
   for (var i = 0; i < list.length; i++) {
-    var tempFlag = _isList(list[i]);
-    var tempLength = tempFlag ? list[i].length : 0;
-    if (flag != tempFlag || length != tempLength) return false;
+    isAllList = _isList(list[i]);
   }
-  return true;
+  return isAllList;
 }
 
 extension Flatten on List {
