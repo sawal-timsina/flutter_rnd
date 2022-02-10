@@ -1,6 +1,6 @@
 class QueryContext {
   dynamic pageParam;
-  List<dynamic> queryKey;
+  final List<dynamic> queryKey;
 
   QueryContext({
     this.pageParam,
