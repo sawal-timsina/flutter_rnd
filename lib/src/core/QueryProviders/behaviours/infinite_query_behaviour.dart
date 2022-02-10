@@ -1,5 +1,13 @@
 import '../behaviours/behaviour.dart';
 
+class InfiniteQueryParams {
+  final bool hasNextPage;
+  final dynamic nextPageParams;
+  final String queryKey;
+
+  InfiniteQueryParams(this.hasNextPage, this.nextPageParams, this.queryKey);
+}
+
 class InfiniteQueryBehaviour<T extends dynamic> extends Behaviour<List<T>> {
   @override
   List<T> parseCacheData(data) {
