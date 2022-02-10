@@ -1,19 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/core/QueryProviders/infinite_query_provider.dart';
 import 'package:watamuki/src/core/QueryProviders/models/query_object.dart';
 import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 import 'package:watamuki/src/core/params/category.dart';
-import 'package:watamuki/src/core/params/facility.dart';
+import 'package:watamuki/src/core/params/coupon.dart';
+import 'package:watamuki/src/core/utils/constants.dart';
 import 'package:watamuki/src/models/category/category.dart';
-import 'package:watamuki/src/models/coupon/index.dart';
+import 'package:watamuki/src/models/coupon/coupon.dart';
 import 'package:watamuki/src/services/index.dart';
 import 'package:watamuki/src/widgets/molecules/category_tab_bar.dart';
 import 'package:watamuki/src/widgets/molecules/coupon_card.dart';
 import 'package:watamuki/src/widgets/molecules/title_bar.dart';
 
 class CouponPage extends StatefulWidget {
-  static const routeName = 'coupons';
+  static const routeName = 'Coupons';
   final ScrollController _controller = ScrollController();
 
   CouponPage({Key? key}) : super(key: key);
@@ -24,17 +26,6 @@ class CouponPage extends StatefulWidget {
 
 class _CouponPageState extends State<CouponPage>
     with AutomaticKeepAliveClientMixin<CouponPage> {
-  void onError(Exception e) {
-    if (e is DioError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.message),
-          backgroundColor: Colors.redAccent,
-        ),
-      );
-    }
-  }
-
   final _categoryQuery = QueryProvider<List<Category>>(
     "coupon_category",
     categoryService.getAllCategory,
@@ -44,18 +35,54 @@ class _CouponPageState extends State<CouponPage>
     },
   );
 
-  final _couponQuery = QueryProvider<List<Coupon>>(
+  final _couponQuery = InfiniteQueryProvider<List<Coupon>>(
     "all_public_coupons",
     couponService.getAllCoupons,
     select: (data) {
       return data["data"];
     },
+    getNextPageParam: (lastPage) {
+      final String? date = lastPage.isNotEmpty ? lastPage.last.createdAt : "";
+      if (date != null) {
+        return date;
+      }
+      return null;
+    },
     fetchOnMount: false,
   );
 
-  void refetchCoupon(Category category) {
-    _couponQuery.params = FacilityParams(categoryId: category.id);
+  void refetchCoupon({Category? category}) {
+    CouponParams? oldParams = CouponParams();
+    if (_couponQuery.params is CouponParams) {
+      oldParams = _couponQuery.params as CouponParams;
+    }
+    _couponQuery.params = CouponParams(
+      categoryId: category?.id ?? oldParams.categoryId,
+    );
     _couponQuery.refetch();
+  }
+
+  void onError(Exception e) {
+    if (e is DioError) {
+      final message = e.response!.data["error"] ?? e.message;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    widget._controller.addListener(() {
+      if (widget._controller.offset ==
+          widget._controller.position.maxScrollExtent) {
+        _couponQuery.fetchNextPage();
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -64,24 +91,27 @@ class _CouponPageState extends State<CouponPage>
     String title = CouponPage.routeName;
 
     _categoryQuery.onError ??= (e) => onError(e);
+    _couponQuery.onError ??= (e) => onError(e);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TitleBar(title: tr(title), icon: Icons.local_activity_outlined),
-        const SizedBox(height: 8),
         StreamBuilder<QueryObject<List<Category>>>(
           stream: _categoryQuery.dataStream,
           builder: (_, AsyncSnapshot<QueryObject<List<Category>>> snap) {
-            final categories = snap.data?.data ?? [];
+            final categories = [
+              Category(name: "スタンプラリー", id: 0),
+              ...?(snap.data?.data)
+            ];
             if (_couponQuery.params == null && categories.isNotEmpty) {
-              refetchCoupon(categories.first);
+              refetchCoupon(category: categories.first);
             }
             return CategoryTabBar<Category>(
               itemKey: "name",
-              tabs: snap.data?.data ?? [],
+              tabs: categories,
               onTap: (value) {
-                refetchCoupon(value);
+                refetchCoupon(category: value);
                 widget._controller.animateTo(
                   widget._controller.position.minScrollExtent,
                   duration: const Duration(milliseconds: 100),
@@ -95,24 +125,27 @@ class _CouponPageState extends State<CouponPage>
           child: RefreshIndicator(
             onRefresh: () async {
               await _categoryQuery.refetch();
-              await _categoryQuery.refetch();
+              await _couponQuery.refetch();
               return Future.value();
             },
-            child: StreamBuilder<QueryObject<List<Coupon>>>(
+            child: StreamBuilder<QueryObject<List<List<Coupon>>>>(
               stream: _couponQuery.dataStream,
               builder: (_, snap) {
-                final coupons = snap.data?.data ?? [];
+                final coupons = (snap.data?.data ?? [[]]).flatten();
                 return ListView.builder(
                   controller: widget._controller,
                   itemCount: coupons.length,
                   itemBuilder: (_, int index) {
+                    final coupon = coupons[index] as Coupon;
                     return CouponCard(
-                      imageUrl: coupons[index].image,
-                      title: coupons[index].title,
-                      benefits: coupons[index].benefits,
-                      useTimes: coupons[index].useTimes,
-                      startDate: coupons[index].startDate,
-                      endDate: coupons[index].endDate,
+                      imageUrl: coupon.image,
+                      title: coupon.title,
+                      benefits: coupon.benefits,
+                      useTimes: coupon.useTimes,
+                      startDate: coupon.startDate,
+                      endDate: coupon.endDate,
+                      isSpecial: coupon.isSpecial,
+                      useCount: coupon.useCount,
                       onButtonPress: () {
                         print("open bottom sheet");
                       },
