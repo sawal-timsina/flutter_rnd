@@ -41,7 +41,7 @@ class InfiniteQueryBehaviour<T extends dynamic> extends Behaviour<List<T>> {
       }
     }
 
-    final _nextPageParams = _getNextPageParam!(tdList.last) as String;
+    final _nextPageParams = (_getNextPageParam!(tdList.last) ?? "") as String;
     if (_nextPageParams.isNotEmpty) {
       onNextPageParams!(InfiniteQueryParams(
           _nextPageParams.isNotEmpty, _nextPageParams, queryKey));
