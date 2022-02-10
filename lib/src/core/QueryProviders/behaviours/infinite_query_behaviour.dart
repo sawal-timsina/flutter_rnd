@@ -9,6 +9,13 @@ class InfiniteQueryParams {
 }
 
 class InfiniteQueryBehaviour<T extends dynamic> extends Behaviour<List<T>> {
+  final dynamic Function(T lastPage)? _getNextPageParam;
+  void Function(InfiniteQueryParams infiniteQueryParams)? onNextPageParams;
+
+  final Map<String, List> paramsList = {};
+
+  InfiniteQueryBehaviour(this._getNextPageParam);
+
   @override
   List<T> parseCacheData(data) {
     return (data as List).map<T>((e) => converter.convert<T>(e)).toList();
