@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/core/QueryProviders/infinite_query_provider.dart';
 import 'package:watamuki/src/core/QueryProviders/models/query_object.dart';
 import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 import 'package:watamuki/src/core/params/category.dart';
 import 'package:watamuki/src/core/params/facility.dart';
+import 'package:watamuki/src/core/utils/constants.dart';
 import 'package:watamuki/src/models/category/category.dart';
 import 'package:watamuki/src/models/facility/facility.dart';
 import 'package:watamuki/src/services/index.dart';
@@ -13,7 +15,7 @@ import 'package:watamuki/src/widgets/molecules/list_item.dart';
 import 'package:watamuki/src/widgets/molecules/title_bar.dart';
 
 class FacilitiesPage extends StatefulWidget {
-  static const routeName = 'facilities';
+  static const routeName = 'Facilities';
   final ScrollController _controller = ScrollController();
 
   FacilitiesPage({Key? key}) : super(key: key);
@@ -24,17 +26,6 @@ class FacilitiesPage extends StatefulWidget {
 
 class _FacilitiesPageState extends State<FacilitiesPage>
     with AutomaticKeepAliveClientMixin<FacilitiesPage> {
-  void onError(Exception e) {
-    if (e is DioError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.message),
-          backgroundColor: Colors.redAccent,
-        ),
-      );
-    }
-  }
-
   final _categoryQuery = QueryProvider<List<Category>>(
     "facility_category",
     categoryService.getAllCategory,
@@ -44,18 +35,54 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     },
   );
 
-  final _facilityQuery = QueryProvider<List<Facility>>(
-    "all_facilities",
+  final _facilityQuery = InfiniteQueryProvider<List<Facility>>(
+    "all_public_facilities",
     facilityService.getAllFacilities,
     select: (data) {
       return data["data"];
     },
+    getNextPageParam: (lastPage) {
+      final String? date = lastPage.isNotEmpty ? lastPage.last.updatedAt : "";
+      if (date != null) {
+        return date;
+      }
+      return null;
+    },
     fetchOnMount: false,
   );
 
-  void refetchFacility(Category category) {
-    _facilityQuery.params = FacilityParams(categoryId: category.id);
+  void refetchFacility({Category? category}) {
+    FacilityParams? oldParams = FacilityParams();
+    if (_facilityQuery.params is FacilityParams) {
+      oldParams = _facilityQuery.params as FacilityParams;
+    }
+    _facilityQuery.params = FacilityParams(
+      categoryId: category?.id ?? oldParams.categoryId,
+    );
     _facilityQuery.refetch();
+  }
+
+  void onError(Exception e) {
+    if (e is DioError) {
+      final message = e.response!.data["error"] ?? e.message;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    widget._controller.addListener(() {
+      if (widget._controller.offset ==
+          widget._controller.position.maxScrollExtent) {
+        _facilityQuery.fetchNextPage();
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -64,24 +91,29 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     String title = FacilitiesPage.routeName;
 
     _categoryQuery.onError ??= (e) => onError(e);
+    _facilityQuery.onError ??= (e) => onError(e);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TitleBar(title: tr(title), icon: Icons.grid_view),
-        const SizedBox(height: 8),
         StreamBuilder<QueryObject<List<Category>>>(
           stream: _categoryQuery.dataStream,
           builder: (_, snap) {
             final categories = snap.data?.data ?? [];
             if (_facilityQuery.params == null && categories.isNotEmpty) {
-              refetchFacility(categories.first);
+              refetchFacility(category: categories.first);
             }
             return CategoryTabBar<Category>(
               itemKey: "name",
               tabs: categories,
               onTap: (value) {
-                refetchFacility(value);
+                refetchFacility(category: value);
+                widget._controller.animateTo(
+                  widget._controller.position.minScrollExtent,
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.easeIn,
+                );
               },
             );
           },
@@ -93,10 +125,10 @@ class _FacilitiesPageState extends State<FacilitiesPage>
               await _facilityQuery.refetch();
               return Future.value();
             },
-            child: StreamBuilder<QueryObject<List<Facility>>>(
+            child: StreamBuilder<QueryObject<List<List<Facility>>>>(
               stream: _facilityQuery.dataStream,
               builder: (_, snap) {
-                final facilities = snap.data?.data ?? [];
+                final facilities = (snap.data?.data ?? [[]]).flatten();
                 return ListView.builder(
                   controller: widget._controller,
                   itemCount: facilities.length,
