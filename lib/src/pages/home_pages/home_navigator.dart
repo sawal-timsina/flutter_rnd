@@ -24,16 +24,20 @@ class _HomeNavigatorState extends State<HomeNavigator> {
     super.dispose();
   }
 
+  bool goBack() {
+    bool? canGoBack = homeNavigator.currentState?.canPop();
+    if (canGoBack!) {
+      homeNavigator.currentState?.pop();
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return DoubleBackToClose(
       onBackPress: () async {
-        bool? canGoBack = homeNavigator.currentState?.canPop();
-        if (canGoBack!) {
-          homeNavigator.currentState?.pop();
-          return false;
-        }
-        return true;
+        return goBack();
       },
       child: Scaffold(
         extendBody: true,
@@ -46,6 +50,7 @@ class _HomeNavigatorState extends State<HomeNavigator> {
         bottomNavigationBar: BottomNavBar(
           onTap: (index) {
             _tabController.jumpToPage(index);
+            goBack();
           },
         ),
       ),

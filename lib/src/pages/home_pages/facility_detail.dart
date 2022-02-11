@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/pages/home_pages/home_navigator.dart';
 import 'package:watamuki/src/widgets/atoms/button.dart';
 
 class FacilityDetailPage extends StatelessWidget {
@@ -17,7 +18,9 @@ class FacilityDetailPage extends StatelessWidget {
           Text(title),
           const SizedBox(height: 8),
           Button(
-            onPressed: () {},
+            onPressed: () {
+              homeNavigator.currentState?.pop();
+            },
             label: title,
           ),
         ],
