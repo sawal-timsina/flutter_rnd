@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:query_provider/query_client_provider.dart';
 import 'package:watamuki/src/App.dart';
 import 'package:watamuki/src/config/config.dart';
-import 'package:watamuki/src/core/QueryProviders/query_client_provider.dart';
 import 'package:watamuki/src/core/utils/json_factory.dart';
 import 'package:watamuki/src/core/utils/shared_preferences_cache_manager.dart';
 import 'package:watamuki/src/injector.dart';

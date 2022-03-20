@@ -1,5 +1,5 @@
-import 'package:watamuki/src/core/QueryProviders/converters/converter.dart';
-import 'package:watamuki/src/core/QueryProviders/converters/json_converter.dart';
+import 'package:query_provider/converters/converter.dart';
+import 'package:query_provider/converters/json_converter.dart';
 import 'package:watamuki/src/models/category/category.dart';
 import 'package:watamuki/src/models/coupon/coupon.dart';
 import 'package:watamuki/src/models/facility/facility.dart';

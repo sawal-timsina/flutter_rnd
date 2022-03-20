@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:watamuki/src/core/QueryProviders/models/params.dart';
+import 'package:query_provider/models/params.dart';
 
 part 'coupon.g.dart';
 

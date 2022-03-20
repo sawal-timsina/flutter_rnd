@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart' show ChangeNotifier;
+import 'package:query_provider/providers/query_provider.dart';
 import 'package:watamuki/src/config/firebase/auth.dart';
-import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
 import 'package:watamuki/src/models/user/user.dart';
 import 'package:watamuki/src/services/index.dart';
 

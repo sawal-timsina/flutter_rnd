@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/core/QueryProviders/infinite_query_provider.dart';
-import 'package:watamuki/src/core/QueryProviders/models/query_object.dart';
-import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
+import 'package:query_provider/models/query_object.dart';
+import 'package:query_provider/providers/infinite_query_provider.dart';
+import 'package:query_provider/providers/query_provider.dart';
 import 'package:watamuki/src/core/params/category.dart';
 import 'package:watamuki/src/core/params/facility.dart';
 import 'package:watamuki/src/core/utils/constants.dart';
@@ -48,18 +48,16 @@ class _FacilitiesPageState extends State<FacilitiesPage>
       }
       return null;
     },
-    fetchOnMount: false,
+    enabled: false,
   );
 
-  void refetchFacility({Category? category}) {
-    FacilityParams? oldParams = FacilityParams();
-    if (_facilityQuery.params is FacilityParams) {
-      oldParams = _facilityQuery.params as FacilityParams;
-    }
+  void setFacilityParams({Category? category}) {
+    FacilityParams? oldParams = _facilityQuery.params != null
+        ? _facilityQuery.params as FacilityParams
+        : FacilityParams();
     _facilityQuery.params = FacilityParams(
       categoryId: category?.id ?? oldParams.categoryId,
     );
-    _facilityQuery.refetch();
   }
 
   void onError(Exception e) {
@@ -76,6 +74,16 @@ class _FacilitiesPageState extends State<FacilitiesPage>
 
   @override
   void initState() {
+    _categoryQuery.dataStream.listen((_categories) {
+      var categories = _categories.data;
+      if (categories != null) {
+        if (_facilityQuery.params == null && categories.isNotEmpty) {
+          setFacilityParams(category: categories.first);
+          _facilityQuery.enabled = true;
+        }
+      }
+    });
+
     widget._controller.addListener(() {
       if (widget._controller.offset ==
           widget._controller.position.maxScrollExtent) {
@@ -100,15 +108,11 @@ class _FacilitiesPageState extends State<FacilitiesPage>
         StreamBuilder<QueryObject<List<Category>>>(
           stream: _categoryQuery.dataStream,
           builder: (_, snap) {
-            final categories = snap.data?.data ?? [];
-            if (_facilityQuery.params == null && categories.isNotEmpty) {
-              refetchFacility(category: categories.first);
-            }
             return CategoryTabBar<Category>(
               itemKey: "name",
-              tabs: categories,
+              tabs: snap.data?.data ?? [],
               onTap: (value) {
-                refetchFacility(category: value);
+                setFacilityParams(category: value);
                 widget._controller.animateTo(
                   widget._controller.position.minScrollExtent,
                   duration: const Duration(milliseconds: 100),

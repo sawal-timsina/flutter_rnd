@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/core/QueryProviders/infinite_query_provider.dart';
-import 'package:watamuki/src/core/QueryProviders/models/query_object.dart';
-import 'package:watamuki/src/core/QueryProviders/query_provider.dart';
+import 'package:query_provider/models/query_object.dart';
+import 'package:query_provider/providers/infinite_query_provider.dart';
+import 'package:query_provider/providers/query_provider.dart';
 import 'package:watamuki/src/core/params/category.dart';
 import 'package:watamuki/src/core/params/coupon.dart';
 import 'package:watamuki/src/core/utils/constants.dart';
@@ -48,18 +48,16 @@ class _CouponPageState extends State<CouponPage>
       }
       return null;
     },
-    fetchOnMount: false,
+    enabled: false,
   );
 
-  void refetchCoupon({Category? category}) {
-    CouponParams? oldParams = CouponParams();
-    if (_couponQuery.params is CouponParams) {
-      oldParams = _couponQuery.params as CouponParams;
-    }
+  void setCouponParams({Category? category}) {
+    CouponParams? oldParams = _couponQuery.params != null
+        ? _couponQuery.params as CouponParams
+        : CouponParams();
     _couponQuery.params = CouponParams(
       categoryId: category?.id ?? oldParams.categoryId,
     );
-    _couponQuery.refetch();
   }
 
   void onError(Exception e) {
@@ -76,6 +74,16 @@ class _CouponPageState extends State<CouponPage>
 
   @override
   void initState() {
+    _categoryQuery.dataStream.listen((_categories) {
+      var categories = _categories.data;
+      if (categories != null) {
+        if (_couponQuery.params == null && categories.isNotEmpty) {
+          setCouponParams(category: categories.first);
+          _couponQuery.enabled = true;
+        }
+      }
+    });
+
     widget._controller.addListener(() {
       if (widget._controller.offset ==
           widget._controller.position.maxScrollExtent) {
@@ -104,14 +112,11 @@ class _CouponPageState extends State<CouponPage>
               Category(name: "スタンプラリー", id: 0),
               ...?(snap.data?.data)
             ];
-            if (_couponQuery.params == null && categories.isNotEmpty) {
-              refetchCoupon(category: categories.first);
-            }
             return CategoryTabBar<Category>(
               itemKey: "name",
               tabs: categories,
               onTap: (value) {
-                refetchCoupon(category: value);
+                setCouponParams(category: value);
                 widget._controller.animateTo(
                   widget._controller.position.minScrollExtent,
                   duration: const Duration(milliseconds: 100),

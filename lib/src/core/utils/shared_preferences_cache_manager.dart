@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:watamuki/src/core/QueryProviders/utils/cache_manager.dart';
+import 'package:query_provider/utils/cache_manager.dart';
 import 'package:watamuki/src/injector.dart';
 
 class SharedPreferencesCacheManager extends CacheManager {

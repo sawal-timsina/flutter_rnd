@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:query_provider/models/query_context.dart';
 import 'package:watamuki/src/config/api/api.dart';
-import 'package:watamuki/src/core/QueryProviders/models/query_context.dart';
 import 'package:watamuki/src/core/params/facility.dart';
 
 abstract class IFacilityService {
