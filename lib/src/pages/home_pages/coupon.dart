@@ -52,7 +52,7 @@ class _CouponPageState extends State<CouponPage>
   );
 
   void setCouponParams({Category? category}) {
-    CouponParams? oldParams = _couponQuery.params != null
+    CouponParams oldParams = _couponQuery.params != null
         ? _couponQuery.params as CouponParams
         : CouponParams();
     _couponQuery.params = CouponParams(

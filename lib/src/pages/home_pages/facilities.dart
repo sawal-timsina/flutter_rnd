@@ -52,7 +52,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
   );
 
   void setFacilityParams({Category? category}) {
-    FacilityParams? oldParams = _facilityQuery.params != null
+    FacilityParams oldParams = _facilityQuery.params != null
         ? _facilityQuery.params as FacilityParams
         : FacilityParams();
     _facilityQuery.params = FacilityParams(
@@ -113,6 +113,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
               tabs: snap.data?.data ?? [],
               onTap: (value) {
                 setFacilityParams(category: value);
+                _facilityQuery.refetch();
                 widget._controller.animateTo(
                   widget._controller.position.minScrollExtent,
                   duration: const Duration(milliseconds: 100),
