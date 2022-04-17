@@ -27,15 +27,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  dio: ^4.0.4
+  dio: ^4.0.6
   easy_localization: ^3.0.0
-  firebase_auth: ^3.3.11
-  firebase_core: ^1.13.1
+  firebase_auth: ^3.3.14
+  firebase_core: ^1.14.1
   flutter:
     sdk: flutter
   flutter_form_builder: ^7.1.1
   fluttericon: ^2.0.0
-  form_builder_validators: ^7.7.0
+  form_builder_validators: ^8.1.0
   get_it: ^7.2.0
   google_fonts: ^2.3.1
   json_annotation: ^4.4.0
@@ -50,9 +50,6 @@ dependencies:
 #      ref: main
 
 dev_dependencies:
-  json_serializable: ^6.1.5
-  build_runner: ^2.1.8
-
   flutter_test:
     sdk: flutter
 

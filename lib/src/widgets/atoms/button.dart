@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/core/utils/constants.dart';
+
+import '../../config/themes/colors.dart';
+import '../../core/utils/constants.dart';
 
 enum ButtonType {
   filled,

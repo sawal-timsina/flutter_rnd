@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/core/utils/constants.dart';
+
+import '../../config/themes/colors.dart';
+import '../../core/utils/constants.dart';
 
 enum TagType { primary, secondary, transparent }
 
@@ -12,14 +13,14 @@ class Tag extends StatelessWidget {
   final EdgeInsets? padding;
 
   final Map<TagType, Color> typeColor = {
-    TagType.primary: AppColors.green.shade500,
+    TagType.primary: AppColors.primary.shade500,
     TagType.secondary: Colors.transparent,
     TagType.transparent: Colors.transparent,
   };
 
   final Map<TagType, Color> textColor = {
     TagType.primary: Colors.white,
-    TagType.secondary: AppColors.green.shade500,
+    TagType.secondary: AppColors.primary.shade500,
     TagType.transparent: AppColors.black,
   };
 

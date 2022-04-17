@@ -1,29 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart'
+    show FormBuilderTextField;
+
+import '../../config/themes/colors.dart';
+import 'input_field.dart';
 
 class TextInput extends StatefulWidget {
   final String name;
   final ValueChanged<String?>? onChanged;
-  final String? labelText;
+  final String? label;
   final String? hintText;
   final bool? required;
+  final bool? enabled;
   final int? maxLength;
   final bool? showCounter;
   final bool obscureText;
+  final TextStyle? style;
+  final TextStyle? labelStyle;
   final FormFieldValidator<String>? validator;
+  final TextInputType? keyboardType;
 
   const TextInput({
     Key? key,
     required this.name,
     this.onChanged,
-    this.labelText,
+    this.label,
     this.hintText,
     this.required,
     this.maxLength,
     this.showCounter,
     this.validator,
     this.obscureText = false,
+    this.style,
+    this.enabled = true,
+    this.labelStyle,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -43,56 +54,42 @@ class _TextInputState extends State<TextInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: 8,
-          children: [
-            if (widget.labelText != null)
-              Text(widget.labelText!,
-                  style: Theme.of(context).textTheme.subtitle1),
-            if (widget.required == true)
-              Text(
-                "*",
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1
-                    ?.copyWith(color: Theme.of(context).primaryColor),
-              )
-          ],
+    return InputField(
+      label: widget.label,
+      required: widget.required,
+      enabled: widget.enabled,
+      labelStyle: widget.labelStyle,
+      child: FormBuilderTextField(
+        key: widget.key,
+        name: widget.name,
+        keyboardType: widget.keyboardType,
+        style: widget.style ?? Theme.of(context).textTheme.subtitle2,
+        obscureText: _secureText,
+        onChanged: widget.onChanged,
+        validator: widget.validator,
+        maxLength: widget.maxLength,
+        enabled: widget.enabled ?? true,
+        decoration: InputDecoration(
+          counterText: widget.showCounter == false ? "" : null,
+          contentPadding: const EdgeInsets.all(16),
+          hintText: widget.hintText,
+          suffixIcon: widget.obscureText == true
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _secureText = !_secureText;
+                    });
+                  },
+                  icon: Icon(
+                    _secureText == true
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: AppColors.greyDark,
+                  ),
+                )
+              : null,
         ),
-        const SizedBox(height: 8),
-        FormBuilderTextField(
-          key: widget.key,
-          name: widget.name,
-          obscureText: _secureText,
-          onChanged: widget.onChanged,
-          validator: widget.validator,
-          maxLength: widget.maxLength,
-          decoration: InputDecoration(
-            counterText: widget.showCounter == false ? "" : null,
-            contentPadding: const EdgeInsets.all(16),
-            hintText: widget.hintText,
-            suffixIcon: widget.obscureText == true
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _secureText = !_secureText;
-                      });
-                    },
-                    icon: Icon(
-                      _secureText == true
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      color: AppColors.greyDark,
-                    ),
-                  )
-                : null,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

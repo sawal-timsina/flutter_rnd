@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watamuki/src/pages/auth/login.dart';
 import 'package:watamuki/src/pages/demo.dart';
 import 'package:watamuki/src/pages/home.dart';
 import 'package:watamuki/src/pages/home_pages/coupon.dart';
@@ -9,7 +10,6 @@ import 'package:watamuki/src/pages/home_pages/stamp.dart';
 import 'package:watamuki/src/pages/home_pages/top.dart';
 import 'package:watamuki/src/pages/home_pages/town_info_details.dart';
 import 'package:watamuki/src/pages/home_pages/town_information.dart';
-import 'package:watamuki/src/pages/login.dart';
 import 'package:watamuki/src/pages/onboarding.dart';
 
 class AppRouter {

@@ -89,7 +89,7 @@ class AppTheme {
   static ThemeData get light {
     return ThemeData(
       brightness: Brightness.light,
-      primarySwatch: AppColors.green,
+      primarySwatch: AppColors.primary,
       scaffoldBackgroundColor: Colors.white,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       fontFamily: GoogleFonts.sourceSansPro().fontFamily,
@@ -120,7 +120,7 @@ class AppTheme {
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
-          borderSide: BorderSide(color: AppColors.green, width: 1),
+          borderSide: BorderSide(color: AppColors.primary, width: 1),
         ),
       ),
       textTheme: TextTheme(

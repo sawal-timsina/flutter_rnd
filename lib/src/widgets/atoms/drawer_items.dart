@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
+
+import '../../config/themes/colors.dart';
 
 class DrawerItem extends StatefulWidget {
   final IconData icon;
