@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/routes/app_routes.dart';
-import 'package:watamuki/src/pages/home.dart';
-import 'package:watamuki/src/widgets/molecules/bottom_nav_bar.dart';
-import 'package:watamuki/src/widgets/organisms/double_back_to_close.dart';
+
+import '../../config/routes/app_routes.dart';
+import '../../widgets/molecules/bottom_nav_bar.dart';
+import '../../widgets/organisms/double_back_to_close.dart';
+import '../home.dart';
 
 final homeNavigator = GlobalKey<NavigatorState>();
 

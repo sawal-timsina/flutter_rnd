@@ -1,18 +1,40 @@
-import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart' show DioError;
+import 'package:easy_localization/easy_localization.dart' show tr;
+import 'package:flutter/material.dart'
+    show
+        AsyncSnapshot,
+        AutomaticKeepAliveClientMixin,
+        BuildContext,
+        Colors,
+        Column,
+        CrossAxisAlignment,
+        Curves,
+        Expanded,
+        Icons,
+        Key,
+        ListView,
+        RefreshIndicator,
+        ScaffoldMessenger,
+        ScrollController,
+        SnackBar,
+        State,
+        StatefulWidget,
+        StreamBuilder,
+        Text,
+        Widget;
 import 'package:query_provider/models/query_object.dart';
 import 'package:query_provider/providers/infinite_query_provider.dart';
 import 'package:query_provider/providers/query_provider.dart';
-import 'package:watamuki/src/core/params/category.dart';
-import 'package:watamuki/src/core/params/coupon.dart';
-import 'package:watamuki/src/core/utils/constants.dart';
-import 'package:watamuki/src/models/category/category.dart';
-import 'package:watamuki/src/models/coupon/coupon.dart';
-import 'package:watamuki/src/services/index.dart';
-import 'package:watamuki/src/widgets/molecules/category_tab_bar.dart';
-import 'package:watamuki/src/widgets/molecules/coupon_card.dart';
-import 'package:watamuki/src/widgets/molecules/title_bar.dart';
+
+import '../../core/params/category.dart';
+import '../../core/params/coupon.dart';
+import '../../core/utils/constants.dart';
+import '../../models/category/category.dart';
+import '../../models/coupon/coupon.dart';
+import '../../services/index.dart';
+import '../../widgets/molecules/category_tab_bar.dart';
+import '../../widgets/molecules/coupon_card.dart';
+import '../../widgets/molecules/title_bar.dart';
 
 class CouponPage extends StatefulWidget {
   static const routeName = 'Coupons';

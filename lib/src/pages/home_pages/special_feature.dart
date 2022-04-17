@@ -1,6 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Center,
+        Key,
+        ListView,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        Widget;
 
+import '../../widgets/atoms/button.dart';
 import 'facility_detail.dart';
 import 'home_navigator.dart';
 import 'town_info_details.dart';

@@ -1,4 +1,36 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Axis,
+        BuildContext,
+        Canvas,
+        ClipPath,
+        Color,
+        Colors,
+        Container,
+        CustomClipper,
+        CustomPaint,
+        CustomPainter,
+        EdgeInsets,
+        Flex,
+        FontWeight,
+        GlobalKey,
+        Key,
+        MediaQuery,
+        Offset,
+        Padding,
+        Paint,
+        Path,
+        RRect,
+        Radius,
+        Rect,
+        Size,
+        SizedBox,
+        State,
+        StatefulWidget,
+        Text,
+        TextStyle,
+        Widget,
+        WidgetsBinding;
 
 class CouponView extends StatefulWidget {
   final Axis axis;

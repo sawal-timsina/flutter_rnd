@@ -1,4 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Color,
+        Colors,
+        Container,
+        EdgeInsets,
+        Icon,
+        IconData,
+        Key,
+        Row,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextStyle,
+        Theme,
+        Widget;
 
 import '../../config/themes/colors.dart';
 import '../../core/utils/constants.dart';

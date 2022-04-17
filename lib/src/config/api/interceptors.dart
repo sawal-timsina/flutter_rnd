@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:watamuki/src/config/firebase/auth.dart';
+
+import '../firebase/auth.dart';
 
 class DioAuthInterceptors extends Interceptor {
   @override

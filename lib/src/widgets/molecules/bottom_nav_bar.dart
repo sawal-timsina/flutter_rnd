@@ -1,10 +1,34 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/pages/home_pages/coupon.dart';
-import 'package:watamuki/src/pages/home_pages/facilities.dart';
-import 'package:watamuki/src/pages/home_pages/stamp.dart';
-import 'package:watamuki/src/pages/home_pages/top.dart';
+import 'package:easy_localization/easy_localization.dart' show tr;
+import 'package:flutter/foundation.dart'
+    show Key, TargetPlatform, defaultTargetPlatform;
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BottomNavigationBar,
+        BottomNavigationBarItem,
+        BoxDecoration,
+        BoxShadow,
+        BuildContext,
+        ClipRRect,
+        Color,
+        Colors,
+        Container,
+        EdgeInsets,
+        Icon,
+        Icons,
+        Key,
+        Offset,
+        Padding,
+        Radius,
+        State,
+        StatefulWidget,
+        TargetPlatform,
+        Widget;
+
+import '../../pages/home_pages/coupon.dart';
+import '../../pages/home_pages/facilities.dart';
+import '../../pages/home_pages/stamp.dart';
+import '../../pages/home_pages/top.dart';
 
 class BottomNavBar extends StatefulWidget {
   final Function(int index) onTap;

@@ -1,4 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BuildContext,
+        Icon,
+        Icons,
+        Key,
+        PreferredSizeWidget,
+        Size,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        Theme,
+        Widget,
+        Wrap,
+        WrapCrossAlignment;
 
 class PageHeader extends StatelessWidget implements PreferredSizeWidget {
   const PageHeader({

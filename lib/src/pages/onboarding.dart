@@ -1,10 +1,24 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:easy_localization/easy_localization.dart' show tr;
+import 'package:flutter/material.dart'
+    show
+        BoxConstraints,
+        BuildContext,
+        Column,
+        ConstrainedBox,
+        Key,
+        MainAxisAlignment,
+        Navigator,
+        Scaffold,
+        StatelessWidget,
+        Text,
+        Widget;
+import 'package:flutter/services.dart'
+    show SystemChrome, SystemUiMode, SystemUiOverlay;
 import 'package:provider/provider.dart';
-import 'package:watamuki/src/pages/home.dart';
-import 'package:watamuki/src/providers/onboarding_provider.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+
+import '../providers/onboarding_provider.dart';
+import '../widgets/atoms/button.dart';
+import 'home.dart';
 
 class Onboarding extends StatelessWidget {
   static const routeName = 'onboarding';

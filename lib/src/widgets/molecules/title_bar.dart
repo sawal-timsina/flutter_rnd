@@ -1,7 +1,20 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
-import 'package:watamuki/src/widgets/atoms/tag.dart';
+import 'package:easy_localization/easy_localization.dart' show tr;
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        CrossAxisAlignment,
+        EdgeInsets,
+        IconData,
+        Key,
+        MainAxisAlignment,
+        Padding,
+        Row,
+        StatelessWidget,
+        Theme,
+        Widget;
+
+import '../atoms/button.dart';
+import '../atoms/tag.dart';
 
 class TitleBar extends StatelessWidget {
   const TitleBar({

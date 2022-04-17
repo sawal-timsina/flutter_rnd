@@ -1,5 +1,12 @@
 import 'package:easy_localization/easy_localization.dart' show tr;
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        DefaultTabController,
+        FormFieldState,
+        Key,
+        StatelessWidget,
+        Widget;
 import 'package:flutter_form_builder/flutter_form_builder.dart'
     show FormBuilderField;
 import 'package:form_builder_validators/form_builder_validators.dart'

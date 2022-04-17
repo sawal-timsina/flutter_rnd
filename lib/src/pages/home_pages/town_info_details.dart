@@ -1,5 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Center,
+        Column,
+        Key,
+        MainAxisAlignment,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        Widget;
+
+import '../../widgets/atoms/button.dart';
 
 class TownInfoDetailPage extends StatelessWidget {
   static const routeName = 'town_info_details';

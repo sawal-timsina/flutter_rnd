@@ -1,4 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        EdgeInsets,
+        GestureTapCallback,
+        Icon,
+        IconData,
+        Key,
+        ListTile,
+        Navigator,
+        State,
+        StatefulWidget,
+        Text,
+        Theme,
+        Widget;
 
 import '../../config/themes/colors.dart';
 

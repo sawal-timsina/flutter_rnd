@@ -1,4 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Color,
+        Column,
+        CrossAxisAlignment,
+        Key,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextStyle,
+        Theme,
+        Widget,
+        Wrap,
+        WrapCrossAlignment;
 
 import '../../config/themes/colors.dart';
 

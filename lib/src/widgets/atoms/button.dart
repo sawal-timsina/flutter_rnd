@@ -1,4 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BorderSide,
+        BoxConstraints,
+        BuildContext,
+        Colors,
+        EdgeInsets,
+        GestureTapCallback,
+        Icon,
+        Key,
+        MainAxisSize,
+        Radius,
+        RawMaterialButton,
+        RoundedRectangleBorder,
+        Row,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextStyle,
+        Theme,
+        Widget;
 
 import '../../config/themes/colors.dart';
 import '../../core/utils/constants.dart';

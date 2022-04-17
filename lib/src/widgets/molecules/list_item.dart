@@ -1,6 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/widgets/atoms/tag.dart';
+import 'package:flutter/material.dart'
+    show
+        AspectRatio,
+        BorderRadius,
+        BoxConstraints,
+        BoxFit,
+        BuildContext,
+        ClipRRect,
+        Column,
+        Container,
+        CrossAxisAlignment,
+        EdgeInsets,
+        Expanded,
+        GestureDetector,
+        GestureTapCallback,
+        HitTestBehavior,
+        IconData,
+        Image,
+        Key,
+        Radius,
+        Row,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextDecoration,
+        TextOverflow,
+        Theme,
+        Widget;
+
+import '../../config/themes/colors.dart';
+import '../atoms/tag.dart';
 
 class ListItem<T> extends StatelessWidget {
   final String title;

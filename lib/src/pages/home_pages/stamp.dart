@@ -1,7 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/pages/home_pages/facility_detail.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:flutter/material.dart'
+    show
+        AutomaticKeepAliveClientMixin,
+        BuildContext,
+        Center,
+        Column,
+        Key,
+        MainAxisAlignment,
+        SizedBox,
+        State,
+        StatefulWidget,
+        Text,
+        Widget;
 
+import '../../widgets/atoms/button.dart';
+import 'facility_detail.dart';
 import 'home_navigator.dart';
 
 class StampPage extends StatefulWidget {

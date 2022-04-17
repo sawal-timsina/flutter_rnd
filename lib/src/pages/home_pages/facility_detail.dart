@@ -1,6 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/pages/home_pages/home_navigator.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Center,
+        Column,
+        Key,
+        MainAxisAlignment,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        Widget;
+
+import '../../widgets/atoms/button.dart';
+import 'home_navigator.dart';
 
 class FacilityDetailPage extends StatelessWidget {
   static const routeName = 'Facility_detail';

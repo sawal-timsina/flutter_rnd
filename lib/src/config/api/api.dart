@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:watamuki/src/config/api/interceptors.dart';
-import 'package:watamuki/src/config/config.dart';
+
+import '../config.dart';
+import 'interceptors.dart';
 
 late final Dio dio;
 

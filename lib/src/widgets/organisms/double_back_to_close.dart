@@ -1,6 +1,18 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Colors,
+        Key,
+        ScaffoldMessenger,
+        SnackBar,
+        SnackBarBehavior,
+        State,
+        StatefulWidget,
+        Text,
+        Widget,
+        WillPopScope;
 
 class DoubleBackToClose extends StatefulWidget {
   final Widget child;

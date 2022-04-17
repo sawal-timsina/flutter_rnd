@@ -11,11 +11,12 @@ import 'package:flutter/material.dart'
         Text,
         Theme,
         Widget;
-import 'package:provider/provider.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/pages/auth/login.dart';
-import 'package:watamuki/src/providers/auth_provider.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:provider/provider.dart' show Consumer;
+
+import '../../config/themes/colors.dart';
+import '../../pages/auth/login.dart';
+import '../../providers/auth_provider.dart';
+import '../atoms/button.dart';
 
 class DrawerTopHeader extends StatelessWidget {
   const DrawerTopHeader({

@@ -1,7 +1,32 @@
 import 'package:easy_localization/easy_localization.dart'
     show tr, BuildContextEasyLocalizationExtension;
 import 'package:flutter/gestures.dart' show TapGestureRecognizer;
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AutovalidateMode,
+        BuildContext,
+        Column,
+        CrossAxisAlignment,
+        EdgeInsets,
+        GestureDetector,
+        GlobalKey,
+        Key,
+        Navigator,
+        RichText,
+        SafeArea,
+        Scaffold,
+        ScaffoldMessenger,
+        SingleChildScrollView,
+        SizedBox,
+        SnackBar,
+        State,
+        StatefulWidget,
+        Text,
+        TextAlign,
+        TextDecoration,
+        TextSpan,
+        Theme,
+        Widget;
 import 'package:flutter_form_builder/flutter_form_builder.dart'
     show FormBuilder, FormBuilderState;
 import 'package:form_builder_validators/form_builder_validators.dart'

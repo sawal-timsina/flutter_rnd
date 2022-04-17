@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show EdgeInsets;
+
+import '../../models/optionItem/index.dart';
 
 class Constants {
   static const pageSize = 15;
@@ -38,3 +40,38 @@ extension Flatten on List {
     return result;
   }
 }
+
+final List<OptionItem> ages = [
+  OptionItem(
+    title: "10代以下",
+    value: "10代以下",
+  ),
+  OptionItem(
+    title: "20代",
+    value: "20代",
+  ),
+  OptionItem(
+    title: "30代",
+    value: "30代",
+  ),
+  OptionItem(
+    title: "40代",
+    value: "40代",
+  ),
+  OptionItem(
+    title: "50代",
+    value: "50代",
+  ),
+  OptionItem(
+    title: "60代",
+    value: "60代",
+  ),
+  OptionItem(
+    title: "70代",
+    value: "70代",
+  ),
+  OptionItem(
+    title: "80代以上",
+    value: "80代以上",
+  )
+];

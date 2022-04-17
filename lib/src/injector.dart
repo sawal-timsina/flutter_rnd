@@ -1,7 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:watamuki/src/config/api/api.dart';
+import 'package:easy_localization/easy_localization.dart' show EasyLocalization;
+import 'package:firebase_core/firebase_core.dart' show Firebase;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
+
+import 'config/api/api.dart';
 
 late SharedPreferences sharedPreferences;
 

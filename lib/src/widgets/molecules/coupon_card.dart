@@ -1,9 +1,33 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
-import 'package:watamuki/src/widgets/atoms/tag.dart';
-import 'package:watamuki/src/widgets/molecules/coupon_view.dart';
+import 'package:easy_localization/easy_localization.dart' show DateFormat, tr;
+import 'package:flutter/material.dart'
+    show
+        AspectRatio,
+        Axis,
+        BoxFit,
+        BuildContext,
+        Column,
+        CrossAxisAlignment,
+        EdgeInsets,
+        GestureTapCallback,
+        Icons,
+        Image,
+        Key,
+        MainAxisAlignment,
+        Padding,
+        Row,
+        Size,
+        SizedBox,
+        StatelessWidget,
+        Text,
+        TextOverflow,
+        TextStyle,
+        Theme,
+        Widget;
+
+import '../../config/themes/colors.dart';
+import '../atoms/button.dart';
+import '../atoms/tag.dart';
+import 'coupon_view.dart';
 
 class CouponCard extends StatelessWidget {
   final String title;

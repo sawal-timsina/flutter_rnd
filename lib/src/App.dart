@@ -1,9 +1,13 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart'
+    show BuildContextEasyLocalizationExtension, tr;
+import 'package:flutter/foundation.dart' show Key, kDebugMode;
+import 'package:flutter/material.dart'
+    show BuildContext, FocusManager, Key, MaterialApp, StatelessWidget, Widget;
+import 'package:form_builder_validators/form_builder_validators.dart'
+    show FormBuilderLocalizations;
+import 'package:provider/provider.dart'
+    show ChangeNotifierProvider, MultiProvider, Provider, WatchContext;
+import 'package:sizer/sizer.dart' show Sizer;
 
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';

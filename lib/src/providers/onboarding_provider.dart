@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:watamuki/src/injector.dart';
+
+import '../injector.dart';
 
 class OnboardingProvider with ChangeNotifier {
   late bool _shouldShowOnboardingPage;

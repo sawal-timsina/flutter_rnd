@@ -1,14 +1,43 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
-import 'package:watamuki/src/config/firebase/auth.dart' show firebaseAuth;
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/pages/demo.dart';
-import 'package:watamuki/src/providers/auth_provider.dart';
-import 'package:watamuki/src/widgets/atoms/drawer_items.dart';
-import 'package:watamuki/src/widgets/molecules/drawer_top_header.dart';
+import 'package:easy_localization/easy_localization.dart' show tr;
+import 'package:flutter/foundation.dart'
+    show Key, TargetPlatform, defaultTargetPlatform;
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BoxConstraints,
+        BuildContext,
+        ClipRRect,
+        Column,
+        Container,
+        Divider,
+        Drawer,
+        EdgeInsets,
+        Expanded,
+        Icon,
+        Icons,
+        Key,
+        ListView,
+        Navigator,
+        Padding,
+        Radius,
+        Row,
+        SafeArea,
+        Size,
+        SizedBox,
+        StatelessWidget,
+        TargetPlatform,
+        Text,
+        Theme,
+        Widget;
+import 'package:provider/provider.dart' show Consumer;
+import 'package:sizer/sizer.dart' show SizerUtil;
+
+import '../../config/firebase/auth.dart' show firebaseAuth;
+import '../../config/themes/colors.dart';
+import '../../pages/demo.dart';
+import '../../providers/auth_provider.dart';
+import '../atoms/drawer_items.dart';
+import '../molecules/drawer_top_header.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);

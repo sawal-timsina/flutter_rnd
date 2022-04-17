@@ -1,6 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/config/themes/colors.dart';
-import 'package:watamuki/src/models/index.dart';
+import 'package:flutter/material.dart'
+    show
+        Border,
+        BorderSide,
+        BoxDecoration,
+        BuildContext,
+        Container,
+        DefaultTabController,
+        EdgeInsets,
+        Key,
+        Padding,
+        StatelessWidget,
+        TabBar,
+        Text,
+        Theme,
+        ValueChanged,
+        Widget;
+
+import '../../config/themes/colors.dart';
+import '../../models/index.dart';
 
 class CategoryTabBar<T> extends StatelessWidget {
   final List<T> tabs;

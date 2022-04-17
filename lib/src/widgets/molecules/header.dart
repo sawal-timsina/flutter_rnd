@@ -1,7 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:watamuki/src/providers/auth_provider.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BuildContext,
+        Icon,
+        Icons,
+        Key,
+        PreferredSizeWidget,
+        Size,
+        SizedBox,
+        StatelessWidget,
+        Theme,
+        Widget;
+import 'package:provider/provider.dart' show Consumer;
+
+import '../../providers/auth_provider.dart';
+import '../atoms/button.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({

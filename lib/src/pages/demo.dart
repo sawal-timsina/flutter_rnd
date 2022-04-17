@@ -1,7 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Center,
+        Column,
+        Key,
+        Scaffold,
+        State,
+        StatefulWidget,
+        Text,
+        Widget;
 import 'package:provider/provider.dart';
-import 'package:watamuki/src/providers/onboarding_provider.dart';
-import 'package:watamuki/src/widgets/molecules/page_header.dart';
+
+import '../providers/onboarding_provider.dart';
+import '../widgets/molecules/page_header.dart';
 
 class DemoScreenArguments {
   final String phone;

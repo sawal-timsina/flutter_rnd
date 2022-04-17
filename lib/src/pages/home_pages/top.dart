@@ -1,9 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:watamuki/src/pages/home_pages/special_feature.dart';
-import 'package:watamuki/src/pages/home_pages/town_information.dart';
-import 'package:watamuki/src/widgets/atoms/button.dart';
+import 'package:flutter/material.dart'
+    show
+        AutomaticKeepAliveClientMixin,
+        BuildContext,
+        Center,
+        Key,
+        ListView,
+        Navigator,
+        SizedBox,
+        State,
+        StatefulWidget,
+        Widget;
 
+import '../../widgets/atoms/button.dart';
 import 'home_navigator.dart';
+import 'special_feature.dart';
+import 'town_information.dart';
 
 class TopPage extends StatefulWidget {
   static const routeName = 'Top';

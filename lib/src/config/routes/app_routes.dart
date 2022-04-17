@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:watamuki/src/pages/auth/login.dart';
-import 'package:watamuki/src/pages/demo.dart';
-import 'package:watamuki/src/pages/home.dart';
-import 'package:watamuki/src/pages/home_pages/coupon.dart';
-import 'package:watamuki/src/pages/home_pages/facilities.dart';
-import 'package:watamuki/src/pages/home_pages/facility_detail.dart';
-import 'package:watamuki/src/pages/home_pages/special_feature.dart';
-import 'package:watamuki/src/pages/home_pages/stamp.dart';
-import 'package:watamuki/src/pages/home_pages/top.dart';
-import 'package:watamuki/src/pages/home_pages/town_info_details.dart';
-import 'package:watamuki/src/pages/home_pages/town_information.dart';
-import 'package:watamuki/src/pages/onboarding.dart';
+
+import '../../pages/auth/login.dart';
+import '../../pages/demo.dart';
+import '../../pages/home.dart';
+import '../../pages/home_pages/coupon.dart';
+import '../../pages/home_pages/facilities.dart';
+import '../../pages/home_pages/facility_detail.dart';
+import '../../pages/home_pages/special_feature.dart';
+import '../../pages/home_pages/stamp.dart';
+import '../../pages/home_pages/top.dart';
+import '../../pages/home_pages/town_info_details.dart';
+import '../../pages/home_pages/town_information.dart';
+import '../../pages/onboarding.dart';
 
 class AppRouter {
   static Route<dynamic> onGenerateRoutes(
