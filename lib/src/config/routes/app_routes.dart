@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../pages/auth/login.dart';
+import '../../pages/auth/register.dart';
 import '../../pages/demo.dart';
 import '../../pages/home.dart';
 import '../../pages/home_pages/coupon.dart';
@@ -20,8 +21,8 @@ class AppRouter {
       switch (settings.name) {
         case LoginPage.routeName:
           return _materialRoute(LoginPage());
-        case 'register':
-          return _materialRoute(const Demo(title: 'Register'));
+        case RegisterPage.routeName:
+          return _materialRoute(RegisterPage());
       }
     }
 
