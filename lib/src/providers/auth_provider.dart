@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' show Response;
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 import 'package:query_provider/providers/query_provider.dart';
@@ -8,9 +9,9 @@ import '../services/index.dart';
 
 class AuthProvider with ChangeNotifier {
   User? _dbUser;
-  final _userQuery =
-      QueryProvider<User>("auth_user", userService.getAuthUser, select: (data) {
-    return data["data"];
+  final _userQuery = QueryProvider<Response, User>(
+      "auth_user", userService.getAuthUser, select: (res) {
+    return res.data["data"];
   }, fetchOnMount: false);
 
   AuthProvider() : super() {

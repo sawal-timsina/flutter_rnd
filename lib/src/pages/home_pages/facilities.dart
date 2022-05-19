@@ -27,20 +27,20 @@ class FacilitiesPage extends StatefulWidget {
 
 class _FacilitiesPageState extends State<FacilitiesPage>
     with AutomaticKeepAliveClientMixin<FacilitiesPage> {
-  final _categoryQuery = QueryProvider<List<Category>>(
+  final _categoryQuery = QueryProvider<Response, List<Category>>(
     "facility_category",
     categoryService.getAllCategory,
     params: CategoryParams(type: CategoryType.facility.value),
-    select: (data) {
-      return data["data"];
+    select: (res) {
+      return res.data["data"];
     },
   );
 
-  final _facilityQuery = InfiniteQueryProvider<List<Facility>>(
+  final _facilityQuery = InfiniteQueryProvider<Response, List<Facility>>(
     "all_public_facilities",
     facilityService.getAllFacilities,
-    select: (data) {
-      return data["data"];
+    select: (res) {
+      return res.data["data"];
     },
     getNextPageParam: (lastPage) {
       final String? date = lastPage.isNotEmpty ? lastPage.last.updatedAt : "";
@@ -86,8 +86,9 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     });
 
     widget._controller.addListener(() {
-      if (widget._controller.offset ==
-          widget._controller.position.maxScrollExtent) {
+      _facilityQuery.behaviour;
+      if ((widget._controller.offset ==
+          widget._controller.position.maxScrollExtent)) {
         _facilityQuery.fetchNextPage();
       }
     });

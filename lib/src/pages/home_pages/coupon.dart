@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart' show DioError;
+import 'package:dio/dio.dart' show DioError, Response;
 import 'package:easy_localization/easy_localization.dart' show tr;
 import 'package:flutter/material.dart'
     show
@@ -48,20 +48,20 @@ class CouponPage extends StatefulWidget {
 
 class _CouponPageState extends State<CouponPage>
     with AutomaticKeepAliveClientMixin<CouponPage> {
-  final _categoryQuery = QueryProvider<List<Category>>(
+  final _categoryQuery = QueryProvider<Response, List<Category>>(
     "coupon_category",
     categoryService.getAllCategory,
     params: CategoryParams(type: CategoryType.coupon.value),
-    select: (data) {
-      return data["data"];
+    select: (res) {
+      return res.data["data"];
     },
   );
 
-  final _couponQuery = InfiniteQueryProvider<List<Coupon>>(
+  final _couponQuery = InfiniteQueryProvider<Response, List<Coupon>>(
     "all_public_coupons",
     couponService.getAllCoupons,
-    select: (data) {
-      return data["data"];
+    select: (res) {
+      return res.data["data"];
     },
     getNextPageParam: (lastPage) {
       final String? date = lastPage.isNotEmpty ? lastPage.last.createdAt : "";
