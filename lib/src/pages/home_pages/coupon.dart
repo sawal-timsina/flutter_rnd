@@ -22,9 +22,9 @@ import 'package:flutter/material.dart'
         StreamBuilder,
         Text,
         Widget;
-import 'package:query_provider/models/query_object.dart';
-import 'package:query_provider/providers/infinite_query_provider.dart';
-import 'package:query_provider/providers/query_provider.dart';
+import 'package:query_provider/models/query_object.dart' show QueryObject;
+import 'package:query_provider/providers/query_provider.dart'
+    show InfiniteQueryProvider, QueryProvider;
 
 import '../../core/params/category.dart';
 import '../../core/params/coupon.dart';

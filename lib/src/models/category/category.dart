@@ -1,10 +1,7 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import '../index.dart';
 
 part 'category.g.dart';
 
-@JsonSerializable()
 class Category extends Indexable {
   final int id;
   final String name;
@@ -14,9 +11,14 @@ class Category extends Indexable {
     required this.name,
   }) : super(id);
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json['id'] as int,
+        name: json['name'] as String,
+      );
 
   @override
-  Map<String, dynamic> toJson() => _$CategoryToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': id,
+        'name': name,
+      };
 }

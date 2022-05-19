@@ -1,9 +1,10 @@
 import 'package:query_provider/converters/converter.dart';
 import 'package:query_provider/converters/json_converter.dart';
-import 'package:watamuki/src/models/category/category.dart';
-import 'package:watamuki/src/models/coupon/coupon.dart';
-import 'package:watamuki/src/models/facility/facility.dart';
-import 'package:watamuki/src/models/user/user.dart';
+
+import '../../models/category/category.dart';
+import '../../models/coupon/coupon.dart';
+import '../../models/facility/facility.dart';
+import '../../models/user/user.dart';
 
 class JsonFactory {
   ResponseConverter call() {

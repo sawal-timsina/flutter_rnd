@@ -1,9 +1,29 @@
-import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:query_provider/models/query_object.dart';
-import 'package:query_provider/providers/infinite_query_provider.dart';
-import 'package:query_provider/providers/query_provider.dart';
+import 'package:dio/dio.dart' show DioError, Response;
+import 'package:easy_localization/easy_localization.dart' show tr;
+import 'package:flutter/material.dart'
+    show
+        AutomaticKeepAliveClientMixin,
+        BuildContext,
+        Colors,
+        Column,
+        CrossAxisAlignment,
+        Curves,
+        Expanded,
+        Icons,
+        Key,
+        ListView,
+        RefreshIndicator,
+        ScaffoldMessenger,
+        ScrollController,
+        SnackBar,
+        State,
+        StatefulWidget,
+        StreamBuilder,
+        Text,
+        Widget;
+import 'package:query_provider/models/query_object.dart' show QueryObject;
+import 'package:query_provider/providers/query_provider.dart'
+    show InfiniteQueryProvider, QueryProvider;
 
 import '../../core/params/category.dart';
 import '../../core/params/facility.dart';
