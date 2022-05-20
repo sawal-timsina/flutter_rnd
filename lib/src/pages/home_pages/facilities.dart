@@ -106,7 +106,6 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     });
 
     widget._controller.addListener(() {
-      _facilityQuery.behaviour;
       if ((widget._controller.offset ==
           widget._controller.position.maxScrollExtent)) {
         _facilityQuery.fetchNextPage();
