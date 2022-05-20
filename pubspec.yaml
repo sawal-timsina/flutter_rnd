@@ -44,10 +44,10 @@ dependencies:
   shared_preferences: ^2.0.15
   sizer: ^2.0.15
   query_provider:
-    path: ../query_provider
-#    git:
-#      url: git://github.com/sawal-timsina/query_provider.git
-#      ref: main
+#    path: ../query_provider
+    git:
+      url: https://github.com/sawal-timsina/query_provider.git
+      ref: main
 
 dev_dependencies:
   flutter_test:
